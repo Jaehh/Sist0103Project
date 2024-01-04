@@ -1,0 +1,14 @@
+package Day0104;
+
+public class DataType_07 {
+
+	public static void main(String[] args) {
+		
+		byte a=(byte)128; //디모션 : 더 작은 자료형으로의 변환, 값손실
+		byte b=127;
+		
+		System.out.println(a);
+		System.out.println(b);
+	}
+
+}

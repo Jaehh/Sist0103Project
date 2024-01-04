@@ -1,0 +1,20 @@
+package Day0104;
+
+public class DataType_06 {
+
+	public static void main(String[] args) {
+		//기본 자료형 8개
+		
+		boolean flag=false; //논리형 true, false
+		//메서드 안에서는 boolean flag; 쓰면 안됨(클래스 안에서는 가능)
+		
+		
+		//문자형
+		//반드시 하나의 문자,16바이트 유니코드값 표현
+		//2바이트 문자하나,한글 가능
+		//기본적으로 정수형,아스키코드로 변경이 가능함
+		//''로 표현
+		char ch='가';
+	}
+
+}
