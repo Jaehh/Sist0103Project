@@ -32,7 +32,7 @@ public class QuizDataType_10 {
 		System.out.printf("나이 : %s 세\n",age);
 		
 		System.out.println("===========================================\n");
-		System.out.printf("%s님의 자바점수는 %d점 오라클점수는 %d점 총 %d점입니다",name,java,oracle,total);
+		System.out.printf("%s님의 자바점수는 %d점 오라클점수는 %d점 총 %d점입니다",name,88,77,total);
 		
 	}
 
