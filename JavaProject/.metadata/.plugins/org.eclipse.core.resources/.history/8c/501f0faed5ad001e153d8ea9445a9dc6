@@ -1,0 +1,23 @@
+package Day0108;
+
+public class For_10 {
+
+	public static void main(String[] args) {
+		// 
+		
+		int i;
+		for(i=1; i<=10; i++) {
+			System.out.print(i+"  ");
+		}
+		
+		System.out.println("\nfor문 빠져나온 i의 값: "+i);
+
+		int a=10;
+		for(;a<=50;a+=5){
+			System.out.print(a+"  ");
+		}
+		System.out.print("\n빠져나온 a값: "+a);
+		
+	}
+
+}

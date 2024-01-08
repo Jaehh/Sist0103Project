@@ -1,0 +1,35 @@
+package Day0108;
+
+import java.util.Scanner;
+
+public class book131_17 {
+
+	public static void main(String[] args) {
+		
+		quiz_1();
+		//quiz_2();
+		//quiz_3();
+
+	}
+
+	public static void quiz_1() {
+
+		//Q. 반복해서 숫자를 입력하여 양수의 갯수와 음수의 갯수를 구하시오(0입력시 종료) 
+		
+		Scanner sc = new Scanner(System.in);
+		
+		
+	}
+
+	public static void quiz_2() {
+
+
+	}
+
+	public static void quiz_3() {
+
+
+	}
+
+
+}

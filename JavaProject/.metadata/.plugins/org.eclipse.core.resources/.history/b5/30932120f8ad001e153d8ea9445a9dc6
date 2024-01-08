@@ -1,0 +1,107 @@
+package Day0108;
+
+import java.util.Scanner;
+
+public class QuizForWhile_15 {
+
+	public static void main(String[] args) {
+
+		//test1();
+		//test2();
+		//test3();
+		//test4();
+		
+	}
+	
+	public static void test1() {
+		//문제: 1~100까지의 3의 배수의 갯수 구하기
+		int n=0;
+		int cnt=0;
+		
+		while(true) {
+			n++;
+			//3의 배수면 cnt변수 1증가
+			if(n%3==0) {
+				cnt++;
+			}
+			//n이 100이면 while문 종료
+			if(n==100) {
+				break;
+			}
+		}
+			System.out.println("3의 배수의 갯수: "+cnt+" 개");
+		
+		
+		
+	}
+	
+	public static void test2() {
+		//1~100까지의 짝수 합 구하기(while(true))
+		int n=0;
+		int sum=0;
+		
+		while(true) {
+			n++;
+			
+			if(n%2==1) {
+				continue;
+			}
+			if(n==100) {
+				break;
+			}
+			sum+=n;
+		}
+		System.out.println("1~100까지의 짝수 합은 "+sum+"입니다");
+		
+		
+	}
+
+	public static void test3() {
+		//for문 이용 1~100까지의 홀수 합 구하기
+	int sum=0;
+	
+		for(int i=1;i<=100;i+=2) {
+		sum+=i;
+	}
+		System.out.println("1~100까지의 짝수 합은 "+sum+"입니다");
+	
+	
+	}
+	
+	
+	public static void test4() {
+		/*
+		 * 
+		 * 1번 점수: 90
+		 * 2번 점수: -70
+		 *       잘못입력했어요
+		 * 2번 점수: 85
+		 * 3번 점수 : 120
+		 *       잘못입력했어요
+		 * 3번 점수 : 88
+		 * 4번 점수: 98
+		 * 5번 점수: 75
+		 * 총점: ***점
+		 * 
+		 * */
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int score=0;
+		int sum=0;
+		
+		for(int i=1;i<=5;i++) {
+			System.out.println(i+"번 점수: "+score);
+			score = sc.nextInt();
+			if(i<0 || i>5) {
+				System.out.println("잘못입력했어요");
+			}
+		}
+		
+		
+	}
+	
+
+
+
+}
