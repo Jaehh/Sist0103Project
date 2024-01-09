@@ -63,7 +63,8 @@ public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int score,count=0,sum=0,avg=0;
+		int score,count=0,sum=0;
+		double avg=0;
 		
 		System.out.println("점수를 입력하시오(1~100)");
 		
@@ -73,20 +74,20 @@ public static void main(String[] args) {
 				break;
 			}
 			if(score<1 || score>100) {
+				System.out.println("\t다시 입력하세요");
 				continue;
 				
 			}
 			count++;
 			sum+=score;
-			avg=sum/count;
+			
 		}
+		avg=(double)sum/count;
+		
 		System.out.println("갯수는 "+count+"입니다");
 		System.out.println("합계는 "+sum+"입니다");
 		System.out.println("평균은 "+avg+"입니다");
 		
-		
 	}
-
-
 
 }

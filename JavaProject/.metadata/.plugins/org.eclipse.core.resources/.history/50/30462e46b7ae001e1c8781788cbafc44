@@ -1,0 +1,13 @@
+package Day0109;
+
+public class ArrMaxNum_13 {
+
+	public static void main(String[] args) {
+		
+		int [] data = {33,62,84,59,393,585,69,25,39};
+		
+		System.out.println("갯수: "+data.length);
+
+	}
+
+}
