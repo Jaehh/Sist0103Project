@@ -1,0 +1,21 @@
+package Day0110;
+
+public class ArraysChange_03 {
+	public static void main(String[] args) {
+		// 순서바꾸기 연습
+		
+		int a=10,b=20;
+		System.out.println("a="+a+" , b="+b);
+		
+		int temp=a; //temp에 a를 담으면 a 비어있음
+		a=b; //비어있는 a에 b 담음
+		b=temp;
+		System.out.println("a="+a+" , b="+b);
+		
+		int[] n= {5,2,6};
+		
+		for(int s:n) {
+			System.out.println(s);
+		}
+	}
+}

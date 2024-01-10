@@ -1,0 +1,52 @@
+package Day0110;
+
+class MyDate{
+	private int year;
+	private int month;
+	private int day;
+	
+	//디폴트생성자
+	public MyDate() {
+		
+	}
+	
+	//명시적생성자_ 생성과 동시에 초기화
+	public MyDate(int y, int m,int d) {
+		year = y;
+		month = m;
+		day = d;
+	}
+	
+	//setter
+	public void setYear(int y) {
+		this.year=y;
+	}
+	public void setMonth(int m) {
+		this.month=m;
+	}
+	public void setDay(int d) {
+		this.day=d;
+	}
+	
+	//getter
+	public int getYear() {
+		return year;
+	}
+	public int getMonth() {
+		return month;
+	}
+	public int getday() {
+		return day;
+	}
+	
+}
+
+public class MyDate_14 {
+
+	public static void main(String[] args) {
+		
+		MyDate m= new MyDate(2024, 01, 10)
+
+	}
+
+}

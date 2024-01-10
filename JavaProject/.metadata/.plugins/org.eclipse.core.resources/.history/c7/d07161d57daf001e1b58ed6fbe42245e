@@ -1,0 +1,33 @@
+package Day0110;
+
+class Info{
+	
+	private String stuName;
+	private int stuAge;
+	
+	//setter 메서드
+	//1. 데이터를 수정할 목적 - set변수명
+	//2. 저장 용도이므로 결과값 return 값이 없다
+	//3. 리턴값이 없으므로 void라고 지정해야 한다
+	public void setName(String stuName) {
+		this.stuName = stuName; //이름이 같을 경우엔 this생략
+		
+	}
+	
+	public void setAge(int stuAge) {
+		this.stuAge=stuAge;
+	}
+}
+
+
+public class WorkerMethod_12 {
+
+	public static void main(String[] args) {
+		
+		Info in1 = new Info();
+		//in1.stuName="홍길동"; 인스턴스 변수에 private이 붙으면 변수접근이 안된다(생성을 하더라도)
+		//in1.stuAge=33;
+
+	}
+
+}

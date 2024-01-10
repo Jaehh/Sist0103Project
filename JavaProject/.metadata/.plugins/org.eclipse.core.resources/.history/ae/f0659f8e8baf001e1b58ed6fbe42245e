@@ -1,0 +1,57 @@
+package Day0110;
+
+class Mart{
+	private String sangpum;
+	int su;
+	int dan;
+	static String SHOPNAME="롯데마트";
+	
+	public Mart(){
+		
+	}
+	/*
+	 * public Mart(String sangpum, int su, int dan) { sangpum = sangpum; su = su;
+	 * dan = dan; }
+	 */
+	public void setSangpum(String sangpum) {
+		this.sangpum=sangpum;
+	}
+	public void setSu(int su) {
+		this.su=su;
+	}
+	public void setDan(int dan) {
+		this.dan=dan;
+	}
+	
+	public String getSangpum(){
+		return sangpum;
+	}
+	public int getSu() {
+		return su;
+	}
+	public int getDan() {
+		return dan;
+	}
+}
+public class QuizClass_16 {
+	
+	public static void main(String[] args) {
+		
+		Mart m2 = new Mart();
+		m2.setSangpum("초코파이");
+        m2.setSu(10);
+        m2.setDan(4500);
+        
+        String sangpum=m2.getSangpum();
+        int su = m2.getSu();
+        int dan = m2.getDan();
+        
+        System.out.println("상품명: "+sangpum);
+        System.out.println("갯수: "+su+"개");
+        System.out.println("가격: "+dan+"원");
+		
+		
+
+	}
+
+}

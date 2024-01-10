@@ -1,0 +1,31 @@
+package Day0110;
+
+public class ArrChangeDats_04 {
+
+	public static void main(String[] args) {
+		 
+		int[] arr = {5,2,7,6,354,34,21,43,67,90};
+		
+		System.out.println("**원래 데이터**");
+		
+		for(int i=0;i<arr.length;i++) {
+			System.out.print(arr[i]+"  ");
+		}
+		System.out.println();
+		
+		System.out.println("** 거꾸로 변경하기**");
+		
+		
+		for(int i=0;i<arr.length/2;i++) {
+			int temp = arr[i];
+			arr[i]=arr[arr.length-1-i]; //10개일때 0하고 9번하고 바꾸기
+			arr[arr.length-1-i]=temp;
+		}
+		
+		for(int i=0;i<arr.length;i++) {
+			System.out.print(arr[i]+"  ");
+		}
+		System.out.println();
+	}
+	
+}

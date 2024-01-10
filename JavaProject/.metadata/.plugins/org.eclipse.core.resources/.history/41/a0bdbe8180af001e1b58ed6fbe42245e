@@ -1,0 +1,43 @@
+package Day0110;
+
+class Ipgo{
+	private String sangName;
+	private int Price;
+	
+	//set 메서드
+	public void setName(String sangName) {
+		this.sangName = sangName;
+	}
+	
+	public void setPrice(int price) {
+		this.Price = price;
+	}
+	
+	//get 메서드
+	public String getName() {
+		return sangName;
+	}
+	
+	public int getPrice() {
+		return Price;
+	}
+	
+}
+
+public class SangpumIpgo_13 {
+
+	public static void main(String[] args) {
+		
+		Info in = new Info();
+		
+		in.setName("사과");
+		in.setPrice(500);
+		
+		String name= in.getName();
+		int price = in.getPrice();
+		
+		System.out.println(name+","+price+"원");
+
+	}
+
+}
