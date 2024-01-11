@@ -6,7 +6,7 @@ class Car{
 	
 	//생성자 선언
 	Car(String model){
-		this.model = model;
+		this.model = model; 
 	}
 	
 	//메소드 선언
