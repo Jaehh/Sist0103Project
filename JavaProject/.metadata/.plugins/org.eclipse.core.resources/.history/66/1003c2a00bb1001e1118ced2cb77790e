@@ -1,0 +1,60 @@
+package Day0112;
+
+
+//부모클래스
+class Car{
+	private String carCompany; //제조회사
+	private String carKind;//종류
+	
+	public Car() {
+		this("현대","전기차");
+	}
+	public Car(String cCompany, String cKind) {
+		this.carCompany = cCompany;
+		this.carKind = cKind;
+	}
+	
+	
+	public String getCarCompany() {
+		return carCompany;
+	}
+	public void setCarCompany(String carCompany) {
+		this.carCompany = carCompany;
+	}
+	public String getCarKind() {
+		return carKind;
+	}
+	public void setCarKind(String carKind) {
+		this.carKind = carKind;
+	}
+	public void writeData() {
+		System.out.println("회사명: "+this.carCompany);
+		System.out.println("종류: "+this.carKind);
+	}
+	
+}
+
+class MyCar extends Car{
+	private String carName;
+	private String carColor;
+	private int carPrice;
+	
+	public MyCar() {
+		
+	}
+public MyCar(String ccompany, String ckind,String cName,String cColor, int cPrice) {
+	super(ccompany,ckind);
+	this.carName = cName;
+	this.carColor = cColor;
+	this.carPrice = cPrice;
+		
+	}
+}
+public class Inherit_08 {
+
+	public static void main(String[] args) {
+	
+
+	}
+
+}

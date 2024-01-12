@@ -8,6 +8,14 @@ class Emp{
 	private int fSu; //가족수
 	private int tSu; //오버타입시간
 	
+	//명시적 생성자
+	public Emp(String name, int pay, int fs, int ts) {
+		this.sName=name;
+		this.gPay= pay;
+		this.fSu = fs;
+		this.tSu = ts;
+	}
+	
 	//setter & getter
 	public String getsName() {
 		return sName;
@@ -100,7 +108,7 @@ public class SawonInstanceScanner_14 {
 		inwon=Integer.parseInt(sc.nextLine());
 		
 		//배열할당
-		 emp = new Emp[inwon];
+		 //emp = new Emp[inwon];
 		 
 		 //인원수만큼 데이터를 입력
 		 for(int i=0;i<inwon;i++) {
@@ -115,11 +123,13 @@ public class SawonInstanceScanner_14 {
 			 System.out.println("초과근무시간");
 			 int ts = Integer.parseInt(sc.nextLine());
 			 
+			 emp[i] = new Emp(name, pay,fs,ts);
+			 
 			 // setter로 emp클래스에 데이터 넣기
-			 emp[i].setsName(name);
-			 emp[i].setgPay(pay);
-			 emp[i].setfSu(fs);
-			 emp[i].settSu(ts);
+				/*
+				 * emp[i].setsName(name); emp[i].setgPay(pay); emp[i].setfSu(fs);
+				 * emp[i].settSu(ts);
+				 */
 			 
 			 System.out.println();
 			 
