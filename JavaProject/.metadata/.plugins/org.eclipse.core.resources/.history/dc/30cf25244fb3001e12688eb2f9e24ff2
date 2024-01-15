@@ -1,0 +1,27 @@
+package Day0115;
+
+import java.util.List;
+import java.util.Vector;
+
+public class ListEx_07 {
+
+	public static void main(String[] args) {
+	//1. 순차적으로 데이터가 들어간다
+	//2. 중복데이터도 허용한다.
+	//3. 처음 생성시 일정한 갯수로 생성되는데 그 이상의 데이터를 넣으면 자동으로 공간이 늘어난다
+	
+		//List<String> list = new Vector<String>();
+		Vector<String> list = new Vector<String>();
+		//생성자가 디폴트인 경우 기본 할당 크기 10
+		System.out.println("초기데이터갯수: "+list.size());
+		System.out.println("초기할당크기"+list.capacity());
+		
+		list.add("장미");
+		list.add("해바라기");
+		list.add("장미");
+		list.add("장미");
+		list.add("수국");
+		list.add("프리지아");
+		
+	}
+}

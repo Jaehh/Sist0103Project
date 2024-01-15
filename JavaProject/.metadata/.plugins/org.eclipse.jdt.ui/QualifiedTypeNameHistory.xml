@@ -14,5 +14,16 @@
     <fullyQualifiedTypeName name="Day0111.Student1"/>
     <fullyQualifiedTypeName name="Day0111.Shop"/>
     <fullyQualifiedTypeName name="Day0111.MyCar"/>
+    <fullyQualifiedTypeName name="Day0112.SubObj_03"/>
+    <fullyQualifiedTypeName name="Day0112_1.Sawon_05"/>
+    <fullyQualifiedTypeName name="Day0112.My"/>
+    <fullyQualifiedTypeName name="Day0112.KanganamEmart"/>
+    <fullyQualifiedTypeName name="Day0112.School"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="Day0112.Green"/>
+    <fullyQualifiedTypeName name="Day0112.Select"/>
+    <fullyQualifiedTypeName name="Day0112.Update"/>
+    <fullyQualifiedTypeName name="Day0112.Delete"/>
+    <fullyQualifiedTypeName name="Day0112.FoodShop"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

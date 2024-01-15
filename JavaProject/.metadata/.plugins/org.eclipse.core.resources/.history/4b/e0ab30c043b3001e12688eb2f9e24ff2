@@ -1,0 +1,8 @@
+package Day0115;
+
+public class InheritBoard_03 {
+
+	public static void main(String[] args) {
+		
+	}
+}
