@@ -1,0 +1,53 @@
+package Day0116;
+
+abstract class AbstObj{
+	abstract public void dataIn();
+	abstract public void dataOut();
+}
+
+class SubAbst extends AbstObj{
+
+	@Override
+	public void dataIn() {
+		System.out.println("상속_데이터 입력");
+		
+	}
+
+	@Override
+	public void dataOut() {
+		System.out.println("상속_데이터 출력");
+		
+	}
+	
+}
+
+public class AnonyMous_09 {
+
+	//익명내부클래스
+	AbstObj ab1 = new AbstObj() {
+
+		@Override
+		public void dataIn() {
+			System.out.println("익명내부클래스_데이터입력");
+			
+		}
+
+		@Override
+		public void dataOut() {
+			System.out.println("익명내부클래스_데이터출력");
+			
+		}
+		
+	};
+	
+	public static void main(String[] args) {
+		
+		//익명 내부클래스
+		
+		
+		//상속받은 클래스
+		SubAbst sub = new SubAbst();
+		sub.dataIn();
+		sub.dataOut();
+	}
+}
