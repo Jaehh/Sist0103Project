@@ -10,7 +10,7 @@ public class FileTokenException_14 {
 
 	public static void fileRead() {
 		String fName ="C:\\sist0103\\file\\info.txt";
-		FileReader fr=null;
+		FileReader fr=null;                      
 		BufferedReader br = null;
 		
 	    try {

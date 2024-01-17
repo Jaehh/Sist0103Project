@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
-    <fullyQualifiedTypeName name="Day0110.Numb"/>
-    <fullyQualifiedTypeName name="Day0110.MyDate"/>
-    <fullyQualifiedTypeName name="java.util.Calendar"/>
-    <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
-    <fullyQualifiedTypeName name="Day0111.Person"/>
-    <fullyQualifiedTypeName name="Day0111.Orange"/>
-    <fullyQualifiedTypeName name="Day0111.Test"/>
-    <fullyQualifiedTypeName name="Day0111.Student1"/>
-    <fullyQualifiedTypeName name="Day0111.Shop"/>
-    <fullyQualifiedTypeName name="Day0111.MyCar"/>
-    <fullyQualifiedTypeName name="Day0112.SubObj_03"/>
-    <fullyQualifiedTypeName name="Day0112_1.Sawon_05"/>
     <fullyQualifiedTypeName name="Day0112.My"/>
     <fullyQualifiedTypeName name="Day0112.KanganamEmart"/>
     <fullyQualifiedTypeName name="Day0112.School"/>
@@ -46,7 +33,31 @@
     <fullyQualifiedTypeName name="Day0115.NullPointException_13"/>
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
+    <fullyQualifiedTypeName name="Day0116.UserException"/>
+    <fullyQualifiedTypeName name="Day0116.OuterObj.innerObj"/>
+    <fullyQualifiedTypeName name="Day0116.Outer"/>
+    <fullyQualifiedTypeName name="Day0116.Outer.Inner1"/>
+    <fullyQualifiedTypeName name="Day0116.Outer.Inner2"/>
+    <fullyQualifiedTypeName name="Day0116.AbstEx"/>
+    <fullyQualifiedTypeName name="Day0116.OuterEx"/>
+    <fullyQualifiedTypeName name="Day0116.OuterObject.InnerObject"/>
+    <fullyQualifiedTypeName name="Day0116.OuterObject"/>
+    <fullyQualifiedTypeName name="Day0116.OuterObject.InnerObject2"/>
+    <fullyQualifiedTypeName name="Day0116.AbEx"/>
+    <fullyQualifiedTypeName name="Day0116.Anonymous_08"/>
+    <fullyQualifiedTypeName name="Day0116.AbstObj"/>
+    <fullyQualifiedTypeName name="Day0116.AnonyMous_09"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="Day0116.SawonOuter.InputInner"/>
+    <fullyQualifiedTypeName name="Day0116.SawonOuter"/>
+    <fullyQualifiedTypeName name="Day0116.SawonOuter.SudangInner"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
+    <fullyQualifiedTypeName name="java.util.StringTokenizer"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 </qualifiedTypeNameHistroy>
