@@ -16,6 +16,10 @@ class Emp{
 		this.tSu = ts;
 	}
 	
+	public Emp() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//setter & getter
 	public String getsName() {
 		return sName;

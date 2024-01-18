@@ -1,0 +1,43 @@
+package Day0118;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class SwingEvent_07 extends JFrame{
+	Container cp;
+	JButton btn1,btn2;
+	
+	public SwingEvent_07(String title) {
+super(title);
+		
+		cp = this.getContentPane();
+		
+		this.setBounds(300, 100, 300, 300);
+		cp.setBackground(new Color(255,255,200));
+		initDesign();
+		this.setVisible(true);
+	}
+	public void initDesign() {
+		//Flow 레이아웃으로 버튼 2개 생성
+		//버튼색상 그레이로 변경, 버튼색상 그린으로 변경
+		this.setLayout(new FlowLayout(2));
+		
+		
+		btn1 = new JButton("버튼색상 그레이로 변경");
+		btn1.setHorizontalTextPosition(JButton.CENTER);
+		btn1.setVerticalTextPosition(JButton.BOTTOM);
+		this.add(btn1);
+		
+		btn2 = new JButton("버튼색상 그린으로 변경");
+		this.add(btn2);
+		
+	}
+	
+	public static void main(String[] args) {
+		new SwingEvent_07("버튼이벤트_7");
+	}
+}

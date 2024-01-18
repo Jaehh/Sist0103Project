@@ -108,7 +108,7 @@ public class QuizMain {
 			System.out.println("이름을 입력하시오");
 			String name = sc.nextLine();
 			System.out.println("JAVA 점수를 입력하시오");
-			java = Integer.parseInt(sc.nextLine());
+			int java = Integer.parseInt(sc.nextLine());
 			System.out.println("Oracle 점수를 입력하시오");
 			int oracle = sc.nextInt();
 			System.out.println("HTML 점수를 입력하시오");
