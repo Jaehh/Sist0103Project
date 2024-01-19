@@ -1,0 +1,20 @@
+package Day0119;
+
+import javax.swing.JFrame;
+
+public class JTable_05 extends JFrame{
+	Container cp;
+	
+	public JTable_05(String title) {
+super(title);
+		
+		cp = this.getContentPane();
+		
+		this.setBounds(300, 100, 300, 300);
+		cp.setBackground(new Color(255,255,200));
+		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		new JTable_05("스윙테이블5");
+	}
+}

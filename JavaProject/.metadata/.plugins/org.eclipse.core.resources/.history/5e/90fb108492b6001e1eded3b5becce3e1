@@ -1,0 +1,40 @@
+package Day0119;
+
+import java.awt.Color;
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+public class FileDialog_06 extends JFrame{
+	Container cp;
+	JTextArea area;
+	JButton btnOpen,btnSave;
+	
+	
+	
+	public FileDialog_06(String title) {
+super(title);
+		
+		cp = this.getContentPane();
+		
+		this.setBounds(300, 100, 300, 300);
+		cp.setBackground(new Color(255,255,200));
+		initDesign();
+		this.setVisible(true);
+	}
+	
+	public void initDesign() {
+		this.setLayout(null);
+		
+		btnOpen = new JButton("파일불러오기");
+		btnOpen.setBounds(40, 20, 120, 30);
+		this.add(btnOpen);
+	}
+	
+	
+	public static void main(String[] args) {
+		new FileDialog_06("파일 다이얼로그_06");
+	}
+}
