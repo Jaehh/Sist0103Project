@@ -60,10 +60,6 @@ super(title);
 		});
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	    // Implement the required method
-	}
 	public static void main(String[] args) {
 		new SwingEvent_07("버튼클래스_07");
 	}

@@ -1,0 +1,244 @@
+--emp 테이블 전체 조회
+select * from emp;
+--emp 테이블의 사원명과 job만 조회
+select ename,job from emp;
+--emp테이블에서 직업만 중복제거 후 조회
+select DISTINCT job from emp;
+--emp 테이블에서 별명을 주어서 출력(allias)
+select ename "직원명", job as "직업군", deptno "부서번호" from emp; 
+--정렬(오름차순이 기본_생략가능)
+select ename 사원명, job "직업군", sal "연봉" from emp order by ename;
+--내림차순
+select ename 사원명, job "직업군", sal "연봉" from emp order by ename desc;
+--emp에서 모든 열 조회하는데 급여가 많은 순부터 정렬
+select * from emp order by sal desc;
+--컬럼으로도 조회가능(6은 SAL을 의미함)
+select * from emp order by 6 asc;
+--조회하는 열중에서의 순번을 의미한다(여기에서는 sal이 2열)
+select ename,sal from emp order by 2;
+--표현식(컬럼명 이외에 출력을 원하는 내용을 select 구문 뒤에  '' (홑따옴표)묶어 사용)
+select ename,'지금 근무중' from emp; 
+--연결연산자 ||
+select '내직업은' ||job||'이고 연봉은' ||sal||'입니다' from emp;
+--My name is Smith 나오도록 출력
+select 'MY name is ' ||ename|| '' from emp;
+
+
+
+--산술연산자
+--emp 에서 사원명 연봉 연봉+100을 보너스라고 입력하여 조회하시오
+select ename 사원명, sal 연봉, sal+100 보너스 from emp;
+--professor를 조회하시오
+select * from professor;
+--professor에서 교수명 급여 보너스 총급여를 입력 조회하시오
+select name 교수명,pay 급여,bonus 보너스,pay+bonus 총급여 from professor;
+--위의 조회값 중 null만 0으로 바꾸기(NVL)
+--NVL 함수는 Null값을 다른값으로 바꿀때 쓰인다(Mysql에서는 IfNull로 바뀐다)
+select name 교수명, pay,NVL(bonus,0),pay+NVL(bonus,0) from professor;
+--emp에서 사원명, 급여, 연봉(급여*12),총급여(급여*12+comm)로 조회
+select ename 사원명,sal 급여,sal*12 연봉,NVL(comm,0) 보너스,sal*12+NVL(comm,0) 총급여 from emp;
+--where절 조건(from절 다음에 나온다)
+--emp에서 deptno가 20번인 사람의 사원명과 직업군 급여를 조회하시오
+select ename 사원명, job 직업군, sal 급여 from emp where deptno=20;
+--emp에서 급여가 4000이상인 사람의 이름과 급여를 조회하시오
+select ename,sal from emp where sal>=4000;
+--emp에서 KING의 사원번호와 사원명 그리고 급여를 조회하시오
+select deptno,ename,sal from emp where ename='KING';
+--입사일이 85년 이후인 사원명, 입사일을 조회하시오
+--문자나 날짜는 ' ' 주고, 숫자는 그냥 입력한다 문자일 경우 대소문자 구분한다
+select ename 사원명, hiredate 입사일 from emp where hiredate>='85/01/01';
+--student에서 키가 180cm이상인 학생들의 이름과 키를 조회하시오
+select name 이름, height 키 from student where height>=180;
+
+
+
+--between 연산자 (between A and B) 작은 것부터 큰 것 순으로
+--student에서 몸무게가 60~75kg 사이인 학생 중 학번, 학생명, 몸무게 순으로 조회하시오
+select studno, name,weight from student where weight between 60 and 75;
+
+
+
+--in 연산자
+--student에서 deptno가 101이거나 201인 사람의 이름과 deptno1을 조회하시오
+select name, deptno1 from student where deptno1 IN(101,201);
+--Null만 조회(is null)
+select name,deptno2 from student where deptno2 is null;
+--Null이 아닌것만 조회(is not null)
+select name,deptno2 from student where deptno2 is not null;
+--Like 연산자 student에서 학생성이 김씨인 사람만 조회
+select * from student where name Like '김%';
+--전체 인원수 count(*)
+select count(*) from student;
+--컬럼명 cnt
+select count(*) cnt from student;
+
+
+
+--emp에서 sal이 3000이상인 경우만 사원명 직업군 급여를 출력하시오
+select ename,job,sal from emp where sal>=3000;
+--emp에서 sal이 2000~3000사이의 모든 컬럼을 출력하시오
+select * from emp where sal between 2000 and 3000;
+select * from emp where sal>=2000 and sal<=3000;
+--직업군이 SALESMAN이거나 MANAGER인 사람의 사원명 직업군을 출력하시오
+select ename,job from emp where job in('SALESMAN', 'MANAGER');
+select enmae, job from emp where job ='SALESMAN' or job = 'MANAGER';
+--emp에서 MGR이 7902,7698,7829인 데이터를 출력하시오
+select * from emp where mgr=7902 or mgr=7698 or mgr=7829;
+select * from emp where MGR IN (7902,7698,7829);
+--emp에서 comm이 null인 경우만 출력하시오
+select * from emp where comm is null;
+--emp에서 사원명이 SMITH인 경우만 출력하시오
+select * from emp where ename='SMITH';
+--student에서 학생성이 김씨인 사람만 출력하고 키가 작은순으로 정렬하시오
+select * from student where name LIKE '김%' order by height asc;
+--student에서 1학년 학생의 이름과 생일, 키, 몸무게를 조회하시오(생일이 빠른사람 순)
+select name,birthday,height,weight from student where grade =1 order by 2;
+select name,birthday,height,weight from student where grade =1 order by birthday;
+--student에서 3학년 학생의 이름과 전화번호를 출력하시오 (단 이름의 오름차순)
+select name,tel from student where grade =3 order by name;
+select name,tel from student where grade =3 order by 이름; -- 별명을 사용해서 정렬도 가능
+
+
+
+--LIKE 연산자 %는 여러개의 문자를 대체한다, _는 하나의 문자를 대체
+select empno,ename,hiredate,sal from emp where ename LIKE '__R%'; --3번째가 R인 사람 출력
+select empno,ename,hiredate,sal from emp where ename LIKE '%S%'; --S를 포함하는 사람 출력
+select empno,ename,hiredate,sal from emp where ename LIKE '__I%' or ename LIKE '_I%';
+select empno,ename,hiredate,sal from emp where ename LIKE '%N'; --N으로 끝나는 사람 출력
+
+
+
+--날짜 리터럴 ' ' 사용
+select empno,ename,hiredate from emp where hiredate >= '1981/01/01' or job='MANAGER';
+select empno,ename,hiredate from emp where hiredate >= '1981/01/01' and job='MANAGER';
+
+
+
+--다중정렬(급여가 내림차순, 이름이 오름차순)
+select empno,ename, sal from emp order by sal desc,ename;
+
+
+
+--student에서 1학년 학생 이름과 키 몸무게 (키는 작은사람부터, 몸무게는 많은 사람부터)
+select name,height,weight from student where grade =1 order by weight desc,height asc;
+
+
+
+--UNION : 두 결과에서 중복된 값 제거하고 출력
+-- UNIONALL : 중복값까지 모두 출력
+
+--student에서 101학과와 201학과를 전공하는 학생들 이름 출력(UNION ALL에서 이름이 2번 나오는 걸로 체크)
+select name from student where deptno1=101 union 
+select name from student where deptno2=201;
+
+
+select name from student where deptno1=101 union all 
+select name from student where deptno2=201;
+
+
+--intersect 연산자 사용 - 두집합의 교집합을 찾는 집합연산
+select name from student where deptno1=101 intersect
+select name from student where deptno2=201;
+
+
+
+-- 그룹함수
+--전체의 데이터 갯수
+select count(*) cnt from emp;
+--sal의 평균
+select round(avg(sal),2) from emp; --소수점 2자리
+select round(avg(sal),1) from emp; --소수점 1자리
+select round(avg(sal),0) from emp; --소수점 없이 반올림
+select round(avg(sal),-1) from emp; --10단위
+select round(avg(sal),-2) from emp; --100단위
+
+
+-- 현재날짜를 콘솔에 출력
+select sysdate from dual;
+
+--내일 날짜를 콘솔에 출력
+select sysdate+1 from dual;
+
+--일주일 뒤 날짜를 콘솔에 출력
+select sysdate+7 from dual;
+
+--날짜에서 년도만 추출
+select to_char(sysdate,'year') from dual; --영어로 년도가 나온다
+select to_char(sysdate,'yyyy') from dual; -- 숫자로 년도가 나온다
+
+--날짜에서 월만 추출
+select to_char(sysdate,'month') from dual;
+select to_char(sysdate,'mm') from dual;
+
+--날짜와 시간출력
+select to_char(sysdate,'yyyy-mm-dd hh:mi:ss') from dual;
+select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') from dual;
+
+
+
+--to_char는 숫자에도 적용가능하다
+select to_char(37834,'999,999,999') from dual; -- 1000단위 구분 기호 999,999,999
+
+select to_char(34.5,'999,999,999') from dual;
+select to_char(34.5,'9999,00') from dual;
+
+
+
+
+
+
+--emp에서 사원번호, 사원명, 급여를 출력하되 급여는 천단위 구분기호로 표시하시오
+select empno 사원번호,ename 사원명,to_char(sal,'$999,999,999')급여 from emp; 
+
+--emp에서 사원번호, 사원명, 입사년도 중에서 년도만 표시하여 출력하시오(ex 1980)
+select empno, ename,to_char(hiredate,'yyyy') from emp;
+
+--현재시간을 2024/01/22으로 콘솔에 출력하시오
+select sysdate,to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') from dual;
+
+
+
+
+
+--Q Day 0122
+-- dept2 테이블의 area 를 중복제거 후 출력하시오
+
+--emp테이블에서 다음과 같이 출력하시오
+--SMITH님의 직업은 CLERK입니다
+select '' ||ename|| '님의 직업은 ' ||job|| '입니다' from emp;
+--SMITH(CLERK)
+select '' ||ename||'('||job|| ')' from emp;
+--professor에서 교수명,급여,보너스, 총급여를 출력하시오
+select name 교수명,pay 급여,bonus 보너스,pay+bonus 총급여 from professor;
+--GOGAK테이블에서 point가 500000 이상인 사람의 이름, 주민번호를 출력하시오
+select gname 고객명, gno 주민번호 from gogak where point>=500000; 
+--student에서 서진수의 학년, 전화번호를 출력하시오
+select name 이름,grade 학년, tel 전화번호 from student where name='서진수';
+--student에서 deptno1이 201이거나 301 인 사람의 이름과 주민번호를 출력하시오
+select name 이름,jumin 주민번호 from student where deptno1=201 or deptno1=301;
+--gogak에서  point가 30~50만 사이인 사람의 이름을 출력하시오
+select gname 고객명 from gogak where point between 300000 and 500000;
+--professor에서 성이 김씨인 사람의 이름, 직위, 전공과목을 출력하시오
+select name 교수명, position 직위,deptno 전공과목 from professor where name LIKE '김%';
+--emp 에서 comm이 null인 사람의 이름과 급여를 출력하시오
+select ename 사원명,sal 급여 from emp where comm is null;
+--emp에서 comm의 null값을 0으로 바꾸어서 직업이 MANAGER인 사람만 이름과 보너스를 출력하시오
+select ename 사원명, NVL(comm,0) 보너스 from emp where job='MANAGER';
+--emp: 사원명 급여 연봉(급여*12) 보너스 총연봉(연봉+보너스)로 출력하시오
+select ename 사원명, sal 급여,sal*12 연봉,NVL(comm,0) 보너스,sal*12+NVL(comm,0) 총연봉 from emp;
+--professor에서 103번 학과 교수들의 교수명, 급여, 보너스,연봉 출력하시오(연봉 = 급여*12+보너스)
+select name 교수명 ,pay 급여 ,bonus 보너스 ,pay*12+bonus 연봉 from professor;
+--student에서 4학년 학생의 이름 키 몸무게 몸무게를 구하시오(몸무게가 많은 순으로 정렬)
+select name 이름, height 키,weight 몸무게 from student where grade =4 order by weight desc;
+--student에서 1학년 학생의 평균키를 구하시오(소수점 1자리)
+select round(avg(height),1)평균키 from student where grade =1;
+--student에서 4학년 학생의 평균몸무게를 구하시오(소수점 2자리)
+select round(avg(weight),2)평균몸무게 from student where grade =4;
+--emp에서 직업이 CLERK,PRESIDENT,ANALYST인 사람의 사번,사원명, 직업을 출력하시오
+select empno 사번, ename 사원명, job 직업 from emp where job IN ('CLERK','PRESIDENT','ANALYST');   
+--professor에서 pay가 300~500사이인 사람의 교수명, 급여를 출력하시오
+select name 교수명, pay 급여 from professor where pay between 300 and 500;
+--professor에서 10월에 입사한 교수의 이름과 직위를 출력하시오
+select name 교수명,position 직위 from professor where to_char(hiredate,'mm')=10;
+--emp에서 세번째 이름이 R인 사람을 출력하시오
+select ename 사원명 from emp where ename LIKE '__R%';

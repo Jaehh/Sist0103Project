@@ -1,0 +1,113 @@
+package Day0119;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+public class Quiz extends JFrame implements ActionListener, ItemListener {
+    JCheckBox maleCheckbox;
+    JRadioButton[] colorRadioButtons;
+    JCheckBox[] countryCheckboxes;
+    JLabel resultLabel;
+
+    public Quiz(String title) {
+        super(title);
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        initUI();
+        setVisible(true);
+    }
+
+    private void initUI() {
+        maleCheckbox = new JCheckBox("남자");
+        maleCheckbox.addItemListener(this);
+        add(maleCheckbox);
+
+        colorRadioButtons = new JRadioButton[3];
+        ButtonGroup colorButtonGroup = new ButtonGroup();
+        colorRadioButtons[0] = new JRadioButton("빨강");
+        colorRadioButtons[1] = new JRadioButton("파랑");
+        colorRadioButtons[2] = new JRadioButton("노랑");
+
+        for (JRadioButton radioButton : colorRadioButtons) {
+            radioButton.addActionListener(this);
+            colorButtonGroup.add(radioButton);
+            add(radioButton);
+        }
+
+        countryCheckboxes = new JCheckBox[4];
+        countryCheckboxes[0] = new JCheckBox("이탈리아");
+        countryCheckboxes[1] = new JCheckBox("미국");
+        countryCheckboxes[2] = new JCheckBox("한국");
+        countryCheckboxes[3] = new JCheckBox("일본");
+
+        for (JCheckBox checkBox : countryCheckboxes) {
+            checkBox.addActionListener(this);
+            add(checkBox);
+        }
+
+        resultLabel = new JLabel("결과: ");
+        add(resultLabel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source == maleCheckbox) {
+            if (maleCheckbox.isSelected()) {
+                resultLabel.setText("결과: 남자입니다.");
+            } else {
+                resultLabel.setText("결과: 여자입니다.");
+            }
+        } else if (source instanceof JRadioButton) {
+            resultLabel.setForeground(getColorFromRadioButton((JRadioButton) source));
+        }
+    }
+
+    private Color getColorFromRadioButton(JRadioButton radioButton) {
+        switch (radioButton.getText()) {
+            case "빨강":
+                return Color.RED;
+            case "파랑":
+                return Color.BLUE;
+            case "노랑":
+                return Color.YELLOW;
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        updateCountryResult();
+    }
+
+    private void updateCountryResult() {
+        StringBuilder resultText = new StringBuilder("내가 가본 나라는 ");
+
+        boolean countrySelected = false;
+
+        for (JCheckBox checkBox : countryCheckboxes) {
+            if (checkBox.isSelected()) {
+                countrySelected = true;
+                resultText.append("[").append(checkBox.getText()).append("] ");
+            }
+        }
+
+        if (!countrySelected) {
+            resultText.append("없습니다.");
+        }
+
+        resultLabel.setText("결과: " + resultText.toString());
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Quiz("GUI 예제"));
+    }
+}
