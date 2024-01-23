@@ -1,0 +1,38 @@
+--Group by [특정조건으로 세부적인 글룹화하기]
+--Q.professor 테이블에서 학과별로 교수들의 평균급여를 출력하시오
+--group by절에 들어간 컬럼을 조회할 때 첫번째 컬럼에 둔다
+select deptno 학과, avg(pay) 평균급여 
+from professor
+group by deptno;
+
+--Q.professor 테이블에서 직급별로 교수들의 평균급여를 출력하시오
+select position 직급, round(avg(pay),2) 평균급여 
+from professor
+group by position;
+
+--Q.professor 테이블에서 학과별,직급별로 교수들의 평균급여를 출력하시오
+select deptno, position, avg(pay) 
+from professor
+group by deptno,position;
+
+
+--Q.student 에서 학년별 평균키와 최고 몸무게를 구하시오
+select grade,avg(height),avg(weight)
+from student
+group by grade 
+order by grade asc;
+
+--Q.교수 직급별로 최고급여와 최고보너스를 조회하시오
+select position,max(pay),max(bonus)
+from professor
+group by position;
+
+--Q.emp에서 직군별로 동일한 직군을 가진 사원수를 구하시오
+select job 직무,count(*)사원수
+from emp
+group by job;
+
+--Q.emp에서 직무별 sal의 평균급여를 구하시오
+select job 직무,round(avg(sal),2) "평균급여"
+from emp
+group by job;
