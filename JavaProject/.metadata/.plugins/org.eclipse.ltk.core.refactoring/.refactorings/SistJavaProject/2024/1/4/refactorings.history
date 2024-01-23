@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SistJavaProject/src/Day0123/OracleSql_02&apos; to &apos;OracleSql_01&apos;" description="Rename resource &apos;OracleSql_02&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Day0123/OracleSql_02" name="OracleSql_01" stamp="1705981342514" updateReferences="true"/>
+</session>
