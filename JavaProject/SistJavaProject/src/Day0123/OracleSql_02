@@ -1,0 +1,268 @@
+--test 테이블
+--primary key(not null + unique)
+--구조보기
+desc test;
+--test에 전체 데이터 insert
+insert into test values(1,'이민규',68.25,'2015-12-25');
+
+--test 조회
+select * from test;
+
+--test에 일부 데이터 insert
+insert into test(num,name) values (2,'홍진화');
+
+--일부 컬럼만 조회
+select num, name from test;
+
+--현재 날짜로 추가
+insert into test values(3,'마동석',88,sysdate);
+
+
+
+
+--☞ 테이블에 컬럼추가
+--SQL> ALTER TABLE 테이블명 ADD 추가할컬럼명 데이터타입;
+alter table test add age number(5);
+
+--주소(addr)를 저장할 컬럼을 추가하는데 초기값을 강남구라고 지정
+alter table test add addr varchar2(30) default '강남구';
+
+insert into test (num,addr) values (7,'서울시 강남구');
+
+
+
+
+--addr의 문자타입 늘려주기
+--☞ 테이블 컬럼의 타입변경
+--SQL> ALTER TABLE 테이블명 MODIFY 컬럼명 데이터타입;
+alter table test modify addr varchar2(70);
+
+--age타입을 varchar2(10)으로 변경하고 초기값을 '22'으로 설정하기
+alter table test modify age varchar2(10) default '22';
+
+--일부만 넣어서 나이가 22로 들어가는지 확인
+--기존 null로 들어간 것은 그대로 있고 새로 insert한 것부터 초기값이 들어간다
+insert into test (num,name,score,birth) values(13,'마동석',77,sysdate);
+
+--num의 오름차순 출력
+select * from test order by num asc;
+
+--num의 내림차순 출력
+select * from test order by num desc;
+
+
+
+
+--age컬럼 삭제
+--☞ 테이블 컬럼 삭제하기
+--SQL> ALTER TABLE 테이블명 DROP COLUMN 삭제할컬럼명
+alter table test drop column age;
+
+--addr컬럼 삭제
+alter table test drop column addr;
+
+
+
+
+--birth를 birthday로 수정
+--☞ 테이블 컬럼명 변경
+--SQL> ALTER TABLE 테이블명 RENAME COLUMN  (변경전컬럼명) TO (변경후컬럼명);
+alter table test rename column  birth to  birthday;
+
+--score를 jumsoo로 변경
+alter table test rename column score to jumsoo;
+
+desc test;
+
+--저장
+commit; 
+
+--테이블 삭제
+drop table test;
+
+
+--시퀀스 기본으로 생성
+create sequence seq1;
+
+--시퀀스 확인
+select * from seq;
+
+--다음 시퀀스 값을 발생시켜 콘솔에 출력
+select seq1.nextval from dual;
+
+--현재 마지막 발생 시퀀스
+select seq1.currval from dual;
+
+--seq1 삭제
+drop sequence seq1;
+
+--10부터 5씩 증가하는 시퀀스를 생성하기 - cache값은 없애기
+create sequence seq1 start with 10 increment by 5 nocache;
+
+--시퀀스 발생
+select seq1.nextval from dual;
+
+--시퀀스 수정, start with는 수정불가, maxvalue 지정 후 그 값까지 나오면 다시 처음부터 나오도록 나오게 할 때
+alter sequence seq1 increment by 10 maxvalue 100 cycle;
+
+
+--seq1 : 시작값 5 증가값 2 끝값 30 캐시 no cycle yes
+create sequence seq1 start with 5 increment by 2 maxvalue 30 nocache cycle; 
+
+--seq2 : 시작값 1, 증가값 2, 캐시 no
+create sequence seq2 start with 1 increment by 2 nocache;
+
+--seq3 : 시작값 1, 증가값 1, 캐시 no
+create sequence seq3 start with 1 increment by 1 nocache;
+
+--출력
+select seq1.nextval,seq2.nextval,seq3.nextval from dual;
+
+--삭제
+drop sequence seq1;
+drop sequence seq2;
+drop sequence seq3;
+
+
+
+
+
+--시퀀스 생성
+create sequence seq_person;
+
+--테이블 생성
+create table person(num number(5) primary key, pname varchar2(20),
+job varchar2(30),gender varchar(10), age number(5),hp varchar2(20),
+birth date);
+
+--birth를 ipsaday로 변경
+alter table person rename column birth to ipsaday;
+
+--구조확인
+desc person;
+
+--조회연습 insert(프로그래머, 교사, 엔지니어,...)
+insert into person values(seq_person.nextval,'이수연','프로그래머','여자',33,'010-2222-4444','2021-01-01');
+insert into person values(seq_person.nextval,'홍길동','교사','남자',36,'010-2422-4844','2022-01-14');
+insert into person values(seq_person.nextval,'이수리','엔지니어','여자',33,'010-2282-4124','2021-01-01');
+insert into person values(seq_person.nextval,'김길동','엔지니어','남자',43,'010-2232-4444','2021-01-01');
+insert into person values(seq_person.nextval,'장수연','프로그래머','여자',23,'010-2232-4404','2021-01-01');
+insert into person values(seq_person.nextval,'방수연','프로그래머','남자',53,'010-8222-4454','2021-10-09');
+insert into person values(seq_person.nextval,'이길동','교사','여자',23,'010-2722-3144','2021-09-21');
+insert into person values(seq_person.nextval,'이수민','교사','여자',53,'010-2225-4944','2021-08-11');
+insert into person values(seq_person.nextval,'이수진','엔지니어','여자',46,'010-2322-4944','2021-03-01');
+insert into person values(seq_person.nextval,'강길동','교사','여자',27,'010-2463-4464','2022-03-01');
+
+--최종저장
+commit;
+
+--최종인원 확인
+selcet count(*) from person;
+
+--이름 오름차순으로 출력
+select * from person order by pname; -- asc는 생략 가능
+
+--나이 역순으로 출력
+select * from person order by age desc;
+select * from person order by 5 desc; -- 컬럼명 대신 열번호도 됨
+
+--gender 오름차순 같은 경우 이름 오름차순
+select * from person order by gender,pname;
+
+--직업만 출력
+select job from person;
+
+--직업 중복 제거 후 출력
+select distinct job from person;
+
+
+--이름이 홍길동인 사람만 출력
+select * from person where pname='홍길동';
+
+--이름 두번째 글자가 수 인 사람 출력
+select * from person where pname LIKE '_수%';
+
+--성이 김씨인 사람만 출력
+select * from person where pname LIKE '김%';
+
+--핸드폰 마지막 네자리가 4444끝나는 사람
+select * from person where hp LIKE '%4444';
+
+
+--입사월이 1월인 사람만 출력
+select * from person where to_char(ipsaday,'mm')='01';
+
+--입사년도가 2021인 사람을 출력하시오
+select * from person where to_char(ipsaday,'yyyy')='2021';
+
+--나이가 25~30사이인 사람만 조회(2가지 방법)
+select * from person where age between 25 and 30;
+select * from person where age>=25 and age<=30;
+
+--직업이 교사이거나 프로그래머인 사람 출력(2가지 방법)
+select * from person where job in('교사','프로그래머');
+select * from person where job='교사' or job='프로그래머';
+
+--성이 김씨이거나 이씨인 사람을 조회하시오
+select * from person where pname like '김%' or pname like '이%';
+
+--여자이면서 나이가 30세 이상인 사람 조회
+select * from person where gender='여자' and age>=30;
+
+--평균나이 구하기(소수점 2자리)
+select round(avg(age),2) from person;
+
+
+--평균나이보다 많은 사람의 이름과 직업 나이를 구하시오
+select pname, job, age
+from person
+where age >=(select avg(age) from person);
+
+--person의 테이블 복사본 생성하기
+create table person2 as select * from person;
+
+--3번의 직업과 나이 수정하기..조건을 안 쓸 시 모든 데이터가 수정된다..조건필수
+update person2 set job='간호사',age=22;
+
+--위에서 잘못 수정한 데이터 원래대로 되돌릭
+Rollback;
+
+--3번의 직업 나이 수정하기
+update person2 set job = '간호사',age =22 where num=3;
+
+--홍씨이면서 교사인 사람의 젠더를 여자로 수정하기
+update person2 set gender='여자' where pname LIKE '홍%' and job='교사';
+
+--num이 8번인 사람의 직업을  프로게이머 입사일을 24/01/01로 변경하시오
+update person2 set job='프로게이머',ipsaday='2024-01-01' where num=8;
+
+--최종저장
+commit;
+
+--삭제
+--num 5번 삭제
+delete from person2 where num=5;
+
+--여자중에서 나이가 33세 이상만 모두 삭제하시오
+delete from person2 where gender='여자' and age>=33;
+
+--핸드폰 뒷자리가 4404인 사람의 나이를 39,입사일을 22/01/01로 수정하시오
+update person2 set age=39, ipsaday='2022-01-01' where hp LIKE '%4404';
+
+--직업이 교사이거나 프로그래머인 사람 모두 삭제하시오
+delete from person2 where job IN('교사','프로그래머');
+
+select * from person2;
+
+--컬럼을 추가하는데 주소를 addr 30바이트 문자열로 추가하라 (기본값은 서울시)
+alter table person2 add addr varchar2(30) default '서울시';
+--컬럼명 변경 hp ==> handphone
+alter table person2 rename column hp to handphone; 
+--데이터 추가하는데 일부만 넣기(num,pname,gender,job)
+insert into person2 (num,pname,gender,job) values (seq_person2.nextval,'홍길동','남자','프로그래머');
+--데이터 추가하는데 일부만 넣기(num,pname,addr,ipsaday)
+insert into person2 (num,pname,addr,ipsaday) values (seq_person2.nextval,'이길동','서울시 강남구','2024-01-01');
+--null일 경우 정해진 값으로 출력한다(NVL이용 직업이 null인 경우 무직으로 출력,나이가 null인 경우 20으로 출력)
+select pname, NVL(job,'무직'), NVL(age,20) from person2;
+--핸드폰이 null인 경우 ****로 출력_이름,핸드폰번호 출력
+select pname, NVL(handphone,'****') from person2;
