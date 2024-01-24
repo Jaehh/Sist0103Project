@@ -1,0 +1,73 @@
+--제약조건 주어서 새로운 테이블 생성
+create table sawon(num number(5) CONSTRAINT sawon_pk_num primary key,
+name varchar2(20),
+gender varchar2(10),
+buseo varchar2(30) CONSTRAINT sawon_ck_buseo check (buseo in ('개발부','인사부','교육부')),
+pay number(10) default 1200000);
+
+
+--시퀀스
+create sequence seq_sawon;
+
+--insert 10개
+insert into sawon values(seq_sawon.nextval,'이순기','남자','개발부',34500000);
+insert into sawon values(seq_sawon.nextval,'김기기','남자','인사부',83800000);
+insert into sawon values(seq_sawon.nextval,'신순기','남자','개발부',14500000);
+insert into sawon values(seq_sawon.nextval,'홍수진','여자','인사부',64500000);
+insert into sawon values(seq_sawon.nextval,'김미라','여자','개발부',27600000);
+insert into sawon values(seq_sawon.nextval,'이미라','여자','교육부',76500000);
+insert into sawon values(seq_sawon.nextval,'박수진','여자','개발부',28500000);
+insert into sawon values(seq_sawon.nextval,'민순기','남자','교육부',15500000);
+insert into sawon values(seq_sawon.nextval,'강수진','여자','개발부',45700000);
+insert into sawon values(seq_sawon.nextval,'임순기','남자','인사부',44600000);
+
+--최종저장
+commit;
+
+--그룹함수 사용해서 테스트
+--부서별 인원수와 최고급여 최저급여를 조회
+select buseo 부서명,count(*) 인원수,max(pay) 최고급여, min(pay) 최저급여
+from sawon
+group by buseo;
+
+--위의 커리문에 최고급여 최저급여에 화폐단위붙이고 3자리 컴마도 나오게 출력
+select buseo 부서명,count(*) 인원수, to_char(max(pay),'L999,999,999') 최고급여, to_char(min(pay),'L999,999,999') 최저급여
+from sawon
+group by buseo;
+
+--부서별 인원수와 평균급여를 출력하시오 제목은 부서명, 인원수, 평균 급여라고 출력(인원수 뒤에 '명'이라고 붙이기)
+select buseo 부서명, count(*) ||'명' 인원수, to_char(avg(pay),'L999,999,999') 평균급여
+from sawon
+group by buseo;
+
+--성별 인원수와 평균급여, 최고급여, 최저급여를 구하시오
+select gender 성별, count(gender) 인원수,avg(pay) 평균급여, max(pay) 최고급여, min(pay) 최저급여
+from sawon
+group by gender;
+
+--부서별 그룹중에서 부서별인원이 4명 이상인 경우만 출력(부서명, 인원수, 평균급여)
+--group by와 연결된 조건은 having 절
+select buseo 부서명, count(buseo) 인원수, to_char(avg(pay),'L999,999,999') 평균급여
+from sawon
+group by buseo
+having count(buseo) >= 4;
+
+--제약조건 제거하기
+--sawon 테이블의 sawon_CK_buseo 를 제거해 보자
+alter table sawon drop CONSTRAINT sawon_ck_buseo;
+
+--제거했으므로 다른 부서도 insert 해보기
+insert into sawon values(seq_sawon.nextval,'송중기','남자','해외영업부',58400000);
+
+--sawon의 name컬럼에 unique 제약조건 추가하기(sawon_uk_name)
+-- UNIQUE는 NOT NULL과 다르게 컬럼명을 다시 한번 더 명시해 주어야 한다 UNIQUE(name)
+alter table sawon add CONSTRAINT sawon_UK_name UNIQUE(name);
+
+
+
+
+
+
+
+
+select * from sawon;

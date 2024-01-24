@@ -1,0 +1,73 @@
+--부서별 가장 많은 급여
+select deptno,Max(sal) from emp group by deptno;
+
+--부서별 가장 급여를 많이 받는 사람
+select deptno,ename,sal 
+from emp 
+where sal in(select Max(sal) from emp group by deptno) 
+order by deptno;
+
+--입사년도별 입사년도, 인원수, 평균급여 출력 (입사년도의 오름차순)
+select to_char(hiredate,'yyyy') 입사년도, count(*) 인원수, round(avg(sal),0) 평균급여
+from emp
+group by to_char(hiredate,'yyyy') order by to_char(hiredate,'yyyy');
+
+
+
+--[RollUp 함수]
+-- 자동으로 소계/합계를 구해주는 함수
+--group by 절에 주어진 조건으로 소계값을 구해준다
+
+select deptno 부서번호, position 직위, sum(pay) 총급여 
+from professor
+group by position, rollup(deptno);
+
+select deptno 부서번호, position 직위, sum(pay) 총급여 
+from professor
+group by deptno, rollup(position);
+
+select position,count(*), sum(pay)
+from professor
+group by rollup(position);
+
+
+
+--[Cube 함수]
+--전체 총합계까지 출력하려면 cube
+
+select deptno, position, count(*),sum(pay)
+from professor
+group by cube(deptno);
+
+
+
+--[Having 절]
+--연봉이 2000 이상인 부서의 부서번호화 평균급여를 구하시오
+select deptno, round(avg(sal),0)
+from emp
+group by deptno
+having avg(sal)>=2000
+order by deptno;
+
+--부서번호가 10,20 중에서 직군별 직원수가 2명 이상인 경우만 조회하시오
+select job,count(*) cnt
+from emp
+where deptno in ('10','20')
+group by job
+having count(*)>=2;
+
+--emp에서 deptno가 10,20,30번 중에서 부서번호가 20인 직군의 부서갯수를 구하시오
+select job,deptno,count(*)
+from emp
+where deptno in('10','20','30') --전체이므로 생략해도 무방하다
+group by job,deptno
+having deptno='20';
+
+--emp에서 직군별로 직군, 급여합계 (MANAGER 직군만 제외)를 구하되 급여합계가 5000이상만 구해서 급여가 높은 순으로 정렬하시오
+select job, sum(sal)
+from emp
+where job not in('MANAGER') -- MANAGER 제외
+group by job --직군별로 그룹
+having sum(sal)>=5000 --급여합계가 5000이상
+order by sum(sal) desc; --급여합계 내림차순
+
