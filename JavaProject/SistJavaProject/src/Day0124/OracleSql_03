@@ -1,0 +1,48 @@
+--조인
+--emp와 dept를 조인해서 emp 사원의 이름과 부서명을 조회하시오
+--SMITH RESEARCH DALLAS
+--방법1
+select e.ename 사원명,d.dname 부서명, d.loc 부서지역
+from emp e,dept d
+where e.deptno = d.deptno;
+
+--방법2
+select emp.ename 사원명, dept.dname 부서명, dept.loc 부서위치
+from emp,dept
+where emp.deptno = dept.deptno;
+
+--방법3
+select ename 사원명, dname 부서명, loc 부서위치
+from emp e, dept d
+where e.deptno = d.deptno;
+
+--department 와 progessor를 조인하여 다음과 같이 출력하시오
+--교수명 학과명
+select p.name 교수명, d.dname 학과명
+from department d, professor p
+where d.deptno = p.deptno;
+
+--emp,dept를 이용하여 부서번호가 10번인 부서의 사원들 중 사원명, 부서명, 급여를 조회하시오
+select ename,dname,sal
+from emp e, dept d
+where e.deptno = d.deptno and d.deptno ='10';
+
+--student professor를 이용하여 다음과 같이 출력하시오
+--학번 학생명 담당교수명
+select s.studno 학번, s.name 학생명, p.name 담당교수명
+from student s, professor p
+where s.profno = p.profno;
+
+--panmae, product 를 이용하여 다음과 같이 출력하시오
+--상품명 총판매가격(p_total)
+select pro.p_name 상품명, p_price 제품가격, p_qty 제품재고량, pan.p_total 총판매가격
+from product pro, panmae pan
+where pro.p_code = pan.p_code;
+
+--student department 를 이용하여 다음과 같이 출력하시오
+--학생명   제1전공
+--서진수  컴퓨터 공학과
+select s.name 학생명, d.dname 제1전공
+from student s, department d
+where s.deptno1 = d.deptno;
+

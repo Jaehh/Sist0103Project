@@ -1,0 +1,65 @@
+--비정규화 된 테이블
+--회사, 직원 테이블 : companysawon
+--회사명 : company 문자열(20)
+--회사주소 : address 문자열 (30)
+--회사전화 : phone 문자열(20)
+--직원명 :  sawon_name 문자열(20)
+--직급 : position 문자열(20)
+--이메일 : emial 문자열(20)
+--휴대폰 : hp 문자열(20)
+
+
+create table companysawon (company varchar2(20), address varchar2 (30),
+phone varchar2(20), sawon_name varchar2(20), position varchar2(20),
+email varchar2(20), hp varchar2 (20));
+
+insert into companysawon values ('삼성','서울시 강남구','02-222-3333','홍길동','과장','hong@gmail.com','010-3534-9384');
+insert into companysawon values ('LG','서울시 서초구','02-323-6333','이길동','부장','lee@gmail.com','010-3533-9383');
+insert into companysawon values ('한화','경기도 용인시','02-722-3643','김길동','사원','kim@gmail.com','010-3436-9386');
+
+--거래처 회사에 대한 정보를 거래처직원을 내가 추가할 때마다 모두 추가해야한다. 즉 메모리 낭비가 심하다
+--회사를 이전 아니면 직급이 바뀌면 많은 데이터를 한번에 모두 수정해야하므로 정말 번거롭다
+--그래서 DB정규화가 필요하다 거래처 회사 정보 따로 직원정보 따로 분리해서 만들어본다
+
+--정규화 디자인
+--회사 아이디 : compant_id 숫자(5) 기본키
+--회사명 : company 문자열(20)
+--회사주소 : address : 문자열(30)
+--회사전화 : phone : 문자열(20)
+
+create table company(company_id number(5) primary key,
+company varchar2(20), address varchar2(30),phone varchar2(20));
+
+--데이터 추가
+insert into company values(10,'LG','서울시 서초구','01-122-5555');
+insert into company values(20,'한화','경기도 용인시','01-152-5353');
+insert into company values(30,'삼성','서울시 강남구','01-122-5522');
+
+
+--거래처 직원 테이블 : C_sawon
+--직원명 :  sawon_name 문자열(20)
+--직급 : position 문자열(20)
+--이메일 : emial 문자열(20)
+--휴대폰 : hp 문자열(20)
+--회사 아이디 : company_id number(5) : 외부키(Foreign key)
+
+create table c_sawon(company_id number(5),
+sawon_name varchar2(20), position varchar2(20),
+email varchar2(20), hp varchar2(20),
+CONSTRAINT c_sawon_FK_id foreign key(company_id) references company(company_id));
+
+insert into c_sawon values(10,'이성일','과장','lee@naver.com','011-222-3333');
+insert into c_sawon values(20,'김미향','부장','kim@naver.com','011-532-3653');
+insert into c_sawon values(20,'윤미래','대리','yoon@naver.com','011-999-3343');
+
+--company와 관계되어진 테이블(c_sawon)에서 10,20 번을 추가하였다
+--20번 한화를 지워보자
+delete from company where company_id=20;
+
+--30번 삭제.. 연결된 자식글이 없으므로 삭제에서 자유롭다
+delete from company where company_id=30;
+
+
+select * from company;
+select * from c_sawon;
+
