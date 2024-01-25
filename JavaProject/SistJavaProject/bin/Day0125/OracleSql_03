@@ -1,0 +1,47 @@
+--foreign key & join
+
+create table board (bno number(3) CONSTRAINT board_pk_bno primary key,
+writer varchar2(30),subject varchar2(50),writeday date);
+
+--board에 insert 
+insert into board values(seq_sawon.nextval,'재슥이','우리 모임관련',sysdate);
+insert into board values(seq_sawon.nextval,'기쁨이','스터디모임',sysdate);
+insert into board values(seq_sawon.nextval,'슬픔이','다이어트 관련부록',sysdate);
+insert into board values(seq_sawon.nextval,'피곤','점심같이먹자',sysdate);
+insert into board values(seq_sawon.nextval,'피곤이','집가고 싶다',sysdate);
+
+commit;
+
+--answer라는 테이블 생성, bno는 board의 bno를 외부키로 설정하고
+--부모 테이블 글을 지우면 그 글에 달린 댓글은 자동으로 삭제되도록
+create table answer(num number(5) CONSTRAINT answer_PK_num primary key,
+bno number(3) CONSTRAINT answer_fk_bno REFERENCES board(bno) on delete cascade,
+nickname varchar2(20),content varchar2(50));
+
+--원하는 글번호 댓글 추가하기
+insert into answer values (seq_sawon.nextval, 21, '명수','야 나도 가도되니?');
+insert into answer values (seq_sawon.nextval, 23, '철수','야');
+insert into answer values (seq_sawon.nextval, 23, '맹구','야');
+insert into answer values (seq_sawon.nextval, 24, '유리','야 나도 가도되니?');
+insert into answer values (seq_sawon.nextval, 21, '짱구','야 나도 가도되니?');
+
+--join해서 출력
+--bno(글번호)  writer(작성자) subject(제목) nickname(댓글단사람) content(댓글내용) writeday(원글작성날짜)
+select b.bno 글번호, b.writer 작성자, b.subject 제목, a.nickname 댓글단사람, a.content 댓글내용, b.subject 원글작성날짜
+from board b, answer a
+where b.bno = a.bno;
+
+--원글 21번 삭제 후 answer 테이블 댓글 사라지는지 확인
+delete from board where bno =21;
+
+--2개 테이블 삭제
+drop table board;
+--자식테이블부터 삭제 후 부모테이블 삭제
+drop table answer;
+drop table board;
+
+select * from board;
+select * from answer;
+
+
+

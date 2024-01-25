@@ -1,0 +1,93 @@
+--시퀀스 생성
+create sequence seq_shop;
+
+--shop 테이블(부모테이블)
+create table shop(num number(5) primary key, 
+sangpum varchar2(30), color varchar2(30));
+
+--shop에 insert 상품추가
+insert into shop values(seq_shop.nextval,'요가매트','핑크');
+insert into shop values(seq_shop.nextval,'아령','블랙');
+insert into shop values(seq_shop.nextval,'레깅스','베이지');
+insert into shop values(seq_shop.nextval,'요가나시','화이트');
+insert into shop values(seq_shop.nextval,'양말','블루');
+
+--최종저장
+commit;
+
+--cart1 테이블 생성, 상품정보는 shop 테이블의 num값을 외부키로 지정한다
+create table cart1(idx number(5) primary key, 
+num number(5) CONSTRAINT cart_fk_num REFERENCES shop(num),
+cnt number(5), guipday date);
+
+--cart2 테이블 생성, 상품정보는 shop테이블의 num값을 외부키로 지정한다
+--부모테이블 상품을 지우면 그 상품과 연결된 카트를 자동으로 지워준다
+create table cart2(idx number(5) primary key, 
+num number(5),
+cnt number(5),guipday date,
+CONSTRAINT cart_FK2_num foreign key(num) REFERENCES shop(num) on delete cascade);
+
+--cart1에 상품추가, 1번상품 카트 담기
+insert into cart1 values(seq_shop.nextval,1,2,sysdate); --1번 요가매트 추가
+
+--cart1에 상품추가, 5번상품 카트 담기
+insert into cart1 values(seq_shop.nextval,5,10,sysdate); --5번 양말 추가
+--shop에 없는 상품담기
+insert into cart1 values(seq_shop.nextval,6,10,sysdate); --없는 상품 오류
+
+--cart2 담기.. 상품3번 카트 담기
+insert into cart2 values(seq_shop.nextval, 3,4,sysdate);
+--cart2 담기.. 상품2번 카트 담기
+insert into cart2 values(seq_shop.nextval, 2,2,sysdate);
+
+commit;
+
+
+--cart1에는 1번 5번 상품이 추가되었다
+
+--shop에서 1번이 삭제되는지 확인
+delete from shop where num=1;
+--무결성 제약조건(STU.CART_FK_NUM)이 위배되었습니다- 자식 레코드가 발견되었습니다
+
+--4번 상품은 아무도 안 담았으므로 오류가 안난다
+delete from shop where num=4;
+
+--롤백
+rollback;
+
+--cart2에는 2번 3번 상품이 담겨있다
+--cart2에 담긴 2번 상품이 있더라도 shop에서 2번상품은 삭제가 될까
+--삭제된다 : cascade 설정으로 부모테이블의 데이터를 지우면 자식테이블의 데이터도 지워진다
+delete from shop where num=3;
+
+
+--join을 위새서 cart2 데이터를 조금 더 추가
+insert into cart2 values(seq_shop.nextval, 1,4,sysdate);
+insert into cart2 values(seq_shop.nextval, 5,10,sysdate);
+insert into cart2 values(seq_shop.nextval, 1,1,sysdate);
+insert into cart2 values(seq_shop.nextval, 1,2,sysdate);
+
+--cart1에 담긴 상품을 shop 테이블과 join해서 자세히 출력해보자
+--방법1
+select  cart1.idx,shop.sangpum,shop.color, cart1.cnt, cart1.guipday
+from shop, cart1
+where shop.num = cart1.num;
+
+--방법2
+select c.idx, c.num, s.sangpum, s.color, c.cnt, c.guipday
+from shop s, cart1 c
+where s.num = c.num;
+
+--방법3 : join하는 테이블에 중복되지 않은 컬럼명은 앞에 테이블명 생략
+select idx, c.num, sangpum, color, cnt, guipday
+from shop s, cart1 c
+where s.num = c.num;
+
+--cart2  편한 방식으로  join 출력해보자
+
+
+
+
+select * from shop;
+select * from cart1;
+select * from cart2;

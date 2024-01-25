@@ -1,0 +1,33 @@
+select *from company;
+select * from c_sawon2;
+
+--부모테이블의 10번 id삭제를 해보자 ----> 안지워진다(자식레코드 발견)
+delete from company where company_id=10;
+
+--자식레코드가 없는 30번 id 를 삭제해보자
+delete from company where company_id =30;
+
+
+--롤백
+rollback;
+
+--자식글이 있어도 원글 삭제 가능하도록 만들기(on delete cascade: 부모글을 지우면 그 자식 레코드도 삭제)
+--on delete cascade:
+--외부키로 테이블이 연결되었다 하더라도 부모테이블의 데이타를 삭제하면 자식테이블의 데이타까지도 자동으로 삭제시켜 주는 기능
+
+create table c_sawon2(company_id number(5),
+sawon_name varchar2(20),position varchar2(20),
+email varchar2(20),hp varchar2(20),
+CONSTRAINT c_sawon2_fk_id foreign key(company_id) references company(company_id) on delete cascade);
+
+
+--C_sawon2에  추가 3개
+insert into c_sawon2 values(10,'김미래','대리','yoon@naver.com','011-444-6555');
+
+
+--c_sawon 모든 레코드 삭제
+delete from c_sawon;
+
+--c_sawon2에서는 부모글의 자식글이 등록된 것이 있다 이럴 경우라도 삭제되는가
+delete from company where company_id=10;
+
