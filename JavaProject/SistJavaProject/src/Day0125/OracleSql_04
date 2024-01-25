@@ -1,0 +1,37 @@
+create sequence seq_food;
+
+create table foodshop(fno number(5) primary key,
+foodname varchar2(30), price varchar2(30),
+fshopname varchar2(30), shoploc varchar2(30));
+
+insert into foodshop values(seq_food.nextval,'스파게티',12000,'파스타가게','강남구');
+insert into foodshop values(seq_food.nextval,'피자',36000,'핏짜피짜','노원구');
+insert into foodshop values(seq_food.nextval,'치킨',17000,'바삭치킨','강북구');
+insert into foodshop values(seq_food.nextval,'햄버거',9000,'버거파크','강남구');
+insert into foodshop values(seq_food.nextval,'스테이크',47000,'스테이크','동대문구');
+
+create table jumun(order_num number(5) primary key,
+order_name varchar2(30), fno number(5),
+order_addr varchar2(30),
+CONSTRAINT jumun_FK_fno foreign key(fno) REFERENCES foodshop(fno) on delete cascade);
+
+insert into jumun values(seq_food.nextval,'홍길동',1,'강남구');
+insert into jumun values(seq_food.nextval,'김길동',2,'노원구');
+insert into jumun values(seq_food.nextval,'이길동',2,'노원구');
+insert into jumun values(seq_food.nextval,'민길동',4,'강남구');
+insert into jumun values(seq_food.nextval,'박길동',3,'강북구');
+
+
+select * from foodshop;
+
+select *from jumun;
+
+select j.order_num 주문번호, f.fno 음식번호, j.order_name 주문자, f.foodname 음식명, f.price 가격,f.fshopname 상호명, f.shoploc 상점위치, j.order_addr 주문자위치
+from foodshop f, jumun j
+where f.fno = j.fno;
+
+
+
+
+
+
