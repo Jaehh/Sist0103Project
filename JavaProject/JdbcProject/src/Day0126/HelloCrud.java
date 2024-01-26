@@ -122,6 +122,86 @@ public class HelloCrud {
 	}
 	
 	
+	//수정하려는 데이터 조회
+	public boolean getOneData(String num) {
+		boolean flag = false; //num에 해당하는 데이터가 있으면 true, 없으면 false
+		
+		String sql = "select * from hello where num="+num;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		conn = db.getOracle();
+		try {
+			stmt = conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			//한개만 조회할 경우는 if문
+			if(rs.next()) {//데이터가 있는 경우
+				flag=true;
+			}else {
+				flag=false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, stmt,conn);
+		}
+		
+		
+		return flag;
+	}
+	
+	
+	//수정
+	public void update() {
+		//수정할 시퀀스를 입력 후 이름, 주소 입력
+		Scanner sc = new Scanner(System.in);
+		String num, name,addr;
+		
+		System.out.println("수정할 번호를 입력");
+		num =sc.nextLine();
+		
+		if(!this.getOneData(num)) {
+			System.out.println("해당번호는 존재하지 않습니다");
+			return; //메서드 종료
+		}
+		
+		System.out.println("수정할 이름으로 변경해주세요");
+		name = sc.nextLine();
+		System.out.println("수정할 주소로 변경해주세요");
+		addr = sc.nextLine();
+		
+		String sql ="update hello set name='"+name+"',addr='"+addr+"' where num="+num;
+		System.out.println(sql);
+		
+		Connection conn = null;
+		Statement stmt = null;
+		
+		conn = db.getOracle();
+		try {
+			stmt = conn.createStatement();
+			
+			int a=stmt.executeUpdate(sql);
+			
+			if(a==0) {
+				System.out.println("수정할 데이터가 존재하지 않습니다");
+			} else {
+				System.out.println("****수정되었습니다***");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(stmt, conn);
+		}
+		
+		
+	}
+	
 	
 	public static void main(String[] args) {
 		HelloCrud hello = new HelloCrud();
@@ -143,6 +223,9 @@ public class HelloCrud {
 				//break;
 			}else if(n==3) {
 				hello.delete();
+				//break;
+			}else if(n==4) {
+				hello.update();
 				//break;
 			}else if(n==9) {
 				System.out.println("종료할게요~~~~~~");
