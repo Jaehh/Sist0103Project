@@ -196,7 +196,7 @@ public class QuizStuInfo {
 		
 		System.out.println("검색할 학생 이름을 입력하시오");
 		
-		word = sc.nextLine();
+		word = sc.nextLine(); 
 		
 		String sql = "SELECT * FROM stuinfo where s_name like '%"+word+"%' order by s_no";
 		ResultSet rs = null;
