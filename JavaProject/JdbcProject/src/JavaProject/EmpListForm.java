@@ -112,7 +112,7 @@ public class EmpListForm extends JFrame{
 			}
 		}
 //		public static void main(String[] args) {
-//			new ShopListForm();
+//			new EmpListForm();
 //		}
 
 	}

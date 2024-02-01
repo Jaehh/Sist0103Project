@@ -12,6 +12,7 @@ public class EmpDto {
 	private String email;
 	private String photo;
 	private String ipsaday;
+
 	public String getNum() {
 		return num;
 	}
@@ -25,7 +26,7 @@ public class EmpDto {
 		this.name = name;
 	}
 	public String getGender() {
-		return gender;
+		 return gender == null ? "" : gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;

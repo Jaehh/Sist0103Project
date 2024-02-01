@@ -8,7 +8,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +32,12 @@ public class EmpAddForm extends JFrame implements ActionListener{
 	JRadioButton tfGender;
 	JLabel lblPhoto;
 	String photoName;
-	JButton btnHome,btnPhoto,btnInsert;
+	JButton btnPhoto,btnInsert;
+	
+	   private JButton btnHome;
+	
+	// 성별 정보를 저장할 변수 (EmpDto에 추가해야 함)
+	private final String[] selectedGender = {" "};
 	
 	//db모델 생성
 	    EmpDbModel model = new EmpDbModel();
@@ -46,8 +55,8 @@ public class EmpAddForm extends JFrame implements ActionListener{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new EmpMain();
 					setVisible(false);
+					new EmpMain().setVisible(true);;
 					
 				}
 			});
@@ -58,45 +67,53 @@ public class EmpAddForm extends JFrame implements ActionListener{
 			this.setLayout(null);
 			
 			//홈화면 버튼
-			btnHome = new JButton("Home");
-			btnHome.setBounds(20, 20, 30, 30);
-			this.add(btnHome);
-			btnHome.addActionListener(this);
+			
+			// Home 버튼에 사용할 아이콘 생성
+			 ImageIcon homeIcon = new ImageIcon("C:/Users/user/Desktop/home.png");
+		        int width = 25;
+		        int height = 25;
+		        Image image = homeIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		        ImageIcon resizedIcon = new ImageIcon(image);
+		        btnHome = new JButton(resizedIcon);
+		        btnHome.setBounds(20, 20, 30, 30);
+		        btnHome.addActionListener(this);
+		        this.add(btnHome);
 			
 			//사진
-			JLabel lbl2 = new JLabel("사진선택");
+			JLabel lbl2 = new JLabel(" ");
 			lbl2.setBounds(30, 60, 60, 30);
 			this.add(lbl2);
 			
 			btnPhoto = new JButton("사진선택");
-			btnPhoto.setBounds(80, 60, 100, 30);
+			btnPhoto.setBounds(100, 270, 90, 30);
 			this.add(btnPhoto);
 			btnPhoto.addActionListener(this);
 			
 			//이미지 추가
-			photoDraw.setBounds(250, 10, 80, 90);
+			//PhotoDraw photoDraw = new PhotoDraw();
+			photoDraw.setBounds(100, 70, 200, 250);
 			this.add(photoDraw);
 			
 			//이미지명 나타나게
-			//lblPhoto = new JLabel("이미지명");
-			//lblPhoto.setBorder(new LineBorder(Color.pink));
-			//lblPhoto.setBounds(20, 120, 300, 30);
-			//this.add(lblPhoto);
+			lblPhoto = new JLabel(" ");
+			//lblPhoto.setBorder(new LineBorder(Color.gray));
+			lblPhoto.setBounds(20, 230, 300, 30);
+			this.add(lblPhoto);
 			
 			
 			//사원명
 			JLabel lbl1 = new JLabel("사원명");
-			lbl1.setBounds(360, 100, 100, 30);
+			lbl1.setBounds(330, 30, 100, 30);
 			this.add(lbl1);
 			
 			tfName = new JTextField();
-			tfName.setBounds(400,100,100,30);
+			tfName.setBounds(370,30,100,30);
 			this.add(tfName);
 			
 			
 			//성별
 			JLabel lbl3 = new JLabel("성별");
-			lbl3.setBounds(30, 150, 70, 30);
+			lbl3.setBounds(330, 70, 70, 30);
 			this.add(lbl3);
 			
 			ButtonGroup group = new ButtonGroup();
@@ -106,13 +123,11 @@ public class EmpAddForm extends JFrame implements ActionListener{
 			group.add(female);
 			
 			// 라디오 버튼을 패널에 추가
-			male.setBounds(110, 150, 50, 30);
-			female.setBounds(160, 150, 50, 30);
+			male.setBounds(370, 70, 50, 30);
+			female.setBounds(420, 70, 50, 30);
 			this.add(male);
 			this.add(female);
 
-			// 성별 정보를 저장할 변수 (EmpDto에 추가해야 함)
-			final String[] selectedGender = {" "};
 
 			// 라디오 버튼에 대한 이벤트 리스너 추가
 			male.addActionListener(new ActionListener() {
@@ -133,54 +148,54 @@ public class EmpAddForm extends JFrame implements ActionListener{
 			//부서
 			String[] dept = {"인사부","개발부","영업부"};
 			cbDept = new JComboBox<String>(dept);
-			cbDept.setBounds(110, 190, 70, 30);
+			cbDept.setBounds(370, 110, 70, 30);
 			this.add(cbDept);
 			
 			JLabel lbl4 = new JLabel("부서");
-			lbl4.setBounds(30, 190, 70, 30);
+			lbl4.setBounds(330, 110, 70, 30);
 			this.add(lbl4);
 			
 			//직책
 			String[] position = {"파트장","팀장","실장","본부장"};
 			cbPosition = new JComboBox<String>(position);
-			cbPosition.setBounds(110, 230, 70, 30);
+			cbPosition.setBounds(370, 150, 70, 30);
 			this.add(cbPosition);
 			
 			JLabel lbl5 = new JLabel("직책");
-			lbl5.setBounds(30, 230, 70, 30);
+			lbl5.setBounds(330, 150, 70, 30);
 			this.add(lbl5);
 			
 			
 			//주소
 			JLabel lbl6 = new JLabel("주소");
-			lbl6.setBounds(30, 270, 70, 30);
+			lbl6.setBounds(330, 190, 70, 30);
 			this.add(lbl6);
 			
 			tfAddr = new JTextField();
-			tfAddr.setBounds(110, 270, 70, 30);
+			tfAddr.setBounds(370, 190,150, 30);
 			this.add(tfAddr);
 			
 			//월급
 			JLabel lbl7 = new JLabel("월급");
-			lbl7.setBounds(30, 310, 70, 30);
+			lbl7.setBounds(330, 230, 70, 30);
 			this.add(lbl7);
 			
 			tfPay = new JTextField();
-			tfPay.setBounds(110, 310, 70, 30);
+			tfPay.setBounds(370, 230, 70, 30);
 			this.add(tfPay);
 			
 			//이메일
 			JLabel lbl8 = new JLabel("이메일");
-			lbl7.setBounds(30, 350, 70, 30);
-			this.add(lbl7);
+			lbl8.setBounds(330, 270, 70, 30);
+			this.add(lbl8);
 			
 			tfEmail = new JTextField();
-			tfEmail.setBounds(110, 350, 70, 30);
+			tfEmail.setBounds(370, 270, 150, 30);
 			this.add(tfEmail);
 			
 			//db추가버튼
-			btnInsert = new JButton("DB 추가");
-			btnInsert.setBounds(160, 240, 100, 30);
+			btnInsert = new JButton("추가");
+			btnInsert.setBounds(550, 320, 100, 30);
 			btnInsert.addActionListener(this);
 			this.add(btnInsert);
 		}
@@ -188,7 +203,7 @@ public class EmpAddForm extends JFrame implements ActionListener{
 		//내부클래스-이미지삽입
 	    class PhotoDraw extends Canvas{
 	   
-	    	public void Paint(Graphics g) {
+	    	public void paint(Graphics g) {
 				// TODO Auto-generated method stub
 	super.paint(g);
 
@@ -198,6 +213,22 @@ public class EmpAddForm extends JFrame implements ActionListener{
 	}
 			}
 	    }
+	 // 이미지 크기를 유지하면서 조절하는 메서드
+//	    private Image getScaledImage(Image image, int width, int height) {
+//	        int originalWidth = image.getWidth(this);
+//	        int originalHeight = image.getHeight(this);
+//
+//	        double widthRatio = (double) width / originalWidth;
+//	        double heightRatio = (double) height / originalHeight;
+//
+//	        double ratio = Math.min(widthRatio, heightRatio);
+//
+//	        width = (int) (originalWidth * ratio);
+//	        height = (int) (originalHeight * ratio);
+//
+//	        return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+//	    }
+
 		
 	    @Override
 		public void actionPerformed(ActionEvent e) {
@@ -214,15 +245,14 @@ public class EmpAddForm extends JFrame implements ActionListener{
 				photoName = dlg.getDirectory()+dlg.getFile();
 				
 				//라벨에 이미지명 출력
-				lblPhoto.setText(photoName);
-				
+				//lblPhoto.setText(photoName);
 				//이미지 출력
 				photoDraw.repaint();
 			} else if(ob==btnInsert) {
 				
 			    EmpDto dto= new EmpDto();
 			    
-			    //dto에 4개의 데이터를 넣는다
+
 			    dto.setName(tfName.getText());
 			    dto.setPhoto(photoName);
 			    dto.setGender(selectedGender[0]);
@@ -237,14 +267,14 @@ public class EmpAddForm extends JFrame implements ActionListener{
 			    
 			    //현재창 닫기
 			    this.setVisible(false);
+			    
+			    //메인화면 띄우기
+			    new EmpMain();
 			}
 			
 		}
 	    
-//		public static void main(String[] args) {
-//			// TODO Auto-generated method stub
-	//new ShopAddForm();
-//		}
+
 
 
 	}
