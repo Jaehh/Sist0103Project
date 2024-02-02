@@ -1,18 +1,19 @@
 package JavaProject;
 
-public class EmpDto {
+import java.util.Date;
 
+public class EmployeeDto {
 	private String num;
 	private String name;
+	private String photo;
 	private String gender;
 	private String dept;
 	private String position;
 	private String addr;
-	private String pay;
+	private int pay;
 	private String email;
-	private String photo;
-	private String ipsaday;
-
+	private Date ipsaday;
+	
 	public String getNum() {
 		return num;
 	}
@@ -25,8 +26,14 @@ public class EmpDto {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public String getGender() {
-		 return gender == null ? "" : gender;
+		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
@@ -49,10 +56,10 @@ public class EmpDto {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getPay() {
+	public int getPay() {
 		return pay;
 	}
-	public void setPay(String pay) {
+	public void setPay(int pay) {
 		this.pay = pay;
 	}
 	public String getEmail() {
@@ -61,19 +68,11 @@ public class EmpDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-	public String getIpsaday() {
+	public Date getIpsaday() {
 		return ipsaday;
 	}
-	public void setIpsaday(String ipsaday) {
+	public void setIpsaday(Date ipsaday) {
 		this.ipsaday = ipsaday;
 	}
-	
-	
-	
+
 }
