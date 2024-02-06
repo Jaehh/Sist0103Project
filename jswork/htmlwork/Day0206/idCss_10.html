@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myimg1{
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            border: 3px solid orange;
+        }
+
+        #myimg2{
+            position: relative;
+            left: 200px;
+            top: 100px;
+            width: 200px;
+        }
+
+        #myimg3{
+            position: absolute;
+            left: 800px;
+            top:150px;
+            width: 200px;
+        }
+
+        #myimg4{
+            width: 300px;
+            height: 300px;
+            background-image: url(../Image/jquery_img/12.png);
+            background-repeat: no-repeat;
+        }
+
+        /* 마우스 클릭시 이미지 변경 */
+        #myimg4 :active{
+            background-image: url(../Image/jquery_img/03.png);
+        }
+
+        /* 마우스 오버시 이미지 변경 */
+        #myimg4:hover{
+            background-image: url(../Image/jquery_img/09.png);
+            background-size: 150px 150px;
+        }
+
+        </style>
+</head>
+<body>
+    <img alt="이미지없음1" src="../Image/jquery_img/01.png" title="미니언즈" id="myimg1">
+    <img alt="이미지없음1" src="../Image/jquery_img/05.png" title="미니언즈" id="myimg2">
+    <img alt="이미지없음1" src="../Image/jquery_img/06.png" title="미니언즈" id="myimg3">
+    <div id="myimg4"></div>
+
+</body>
+</html>
