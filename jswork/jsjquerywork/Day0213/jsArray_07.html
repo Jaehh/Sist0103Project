@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //    var hello = "<h2>"+Hello+"</h2>";
+    //    document.write(hello);
+
+       for(var i=1;i<=10;i++){
+        document.write("<b>"+i+"</b>&nbsp;&nbsp;");
+       }
+
+       document.write("<br><br>");
+
+       //Food폴더의 1~10까지를 출력하시오 (너비:100)
+       for(i=1;i<=10;i++){
+        var f="<img src='../image/Food/"+i+".jpg' width='100' height='100'>";
+        document.write(f);
+       }
+
+      
+       //logoImg폴더에 toy01~toy06.png 까지 출력하시오
+       for(var i=1;i<=6;i++){
+        var t="<img src='../image/logoImg/logoImg/Toy0"+i+".png' width='100' height='100'>";
+        document.write(t);
+    }
+
+    //사진의 일련번호가 없을 때 이미지를 배열에 담아
+    var imgArr=["a01","a02","a03","acc01","acc02","bag01","blackwidow"];
+
+    for(var i=0;i<imgArr.length;i++){
+        var f="<img src='../image/logoImg/logoImg"+imgArr[i]+".png'><br>";
+        document.write(f);
+    }
+
+    //Q. 만화이미지의 01.png~20.png까지를 출력하시오 (4행 5열)
+    for(var i=1;i<=20;i++){
+        var imgname="../image/만화이미지/만화이미지"+(i<10?"0":"")+i+".png";
+
+        var s="<img src='"+imgname+"'>";
+        document.write(s);
+
+        if(i%5==0){
+            document.write("<br><br>");
+        }
+
+            //  if(i<10){
+            //     var c="<img src='../image/만화이미지/만화이미지/0"+i+".png' width='100' height='100'>";
+            // } else
+            //      var c="<img src='../image/만화이미지/만화이미지/"+i+".png' width='100' height='100'>";
+
+            //          document.write(c);
+            //          if(i%5==0){
+            //            document.write("<br>");
+            //             }
+                    
+   }
+    </script>
+
+</body>
+</html>

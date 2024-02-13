@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/buttonStyle.css">
+    <title>Document</title>
+    <script>
+        function test1(a){
+            alert(a+100);
+        }
+
+        function test2(string){
+            alert("문자열 "+string+"를\n 받았아요");
+        }
+
+        function test3(){
+            var ans=confirm("데이터를 추가할까요?");
+            // console.log(ans);
+
+            // if(ans){
+            //     alert("데이터를 추가했습니다");
+            // }else{
+            //     alert("취소했습니다");
+            // }
+
+            if(ans==1)
+                document.getElementById("out").innerHTML='추가했어요';
+            else
+                document.getElementById("out").innerHTML='취소했어요';
+        }
+
+        window.onload=function(){
+            document.getElementById("btn4").onclick=function(){
+                var city=prompt("당신이 사는 지역은 어디입니까?");
+
+                 out.innerHTML="제가 사는 지역은 "+city.fontcolor("red")+" 입니다";
+            }
+        }
+        </script>
+</head>
+<body>
+    <input type="button" value="alert" class="btn btn-pink" onclick="test1(200)">
+    <input type="button" value="alert" class="btn btn-green" onclick="test2('hello')">
+    <input type="button" value="confirm" class="btn btn-black" onclick="test3()">
+    <input type="button" value="prompt" class="btn btn-pink" id="btn4">
+
+        <div id="out"> 출력하는 곳</div>
+</body>
+</html>
