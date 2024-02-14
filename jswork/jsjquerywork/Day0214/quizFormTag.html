@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Noto+Sans+KR:wght@100..900&family=Orbit&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+  
+        table{
+            border-collapse: collapse;
+            width: 500px;
+            border: 3px solid gray;
+        }
+        th,td{
+            border: 1px solid gray;
+        }
+
+        #result{
+            font-family:'Dongle' ;
+            width: 500px;
+            height: 300px;
+            border: 2px solid gray;
+            margin-top: 20px;
+            padding: 20px 20px;
+            font-size: 28px;
+        }
+        </style>
+        <script>
+             window.onload=function(){
+                document.getElementById("btnResult").onclick=function(){
+                    var s="";
+                    s="이름: "+document.getElementById("name").value+
+                    "<br> 비밀번호: "+document.getElementById("pw").value+
+            "<br>";
+                
+                    
+                    document.getElementById("result").innerHTML=s;
+
+
+           var blood=document.getElementsByName("blood");
+            for(var i=0;i<blood.length;i++){
+                if(blood[i].checked){
+                    document.getElementById("result").innerHTML+="혈액형: "+blood[i].value+"<br>";
+                    break;
+                }
+            }
+
+            var lang = document.getElementsByName("lang");
+            var langStr=" ";
+            var flag=false;
+            for(var i=0;i<lang.length;i++){
+                if(lang[i].checked){
+                    flag=true;
+                    langStr+=lang[i].value+"   ";
+                }
+            }
+            if(!flag){
+                langStr+="가능한 언어가 없습니다<br>";
+            }else{
+                langStr+="<br>";
+            }
+            document.getElementById("result").innerHTML += "가능언어: " + langStr;
+
+        //      var selectedDate = document.getElementById("ipsa").value;
+        //  document.getElementById("result").innerHTML = "입사날짜: " + selectedDate + "<br>";
+        };
+
+};
+            
+            </script>
+</head>
+<body>
+    <form>
+        <table>
+            <caption><b>폼태그 과제_개인정보</b></caption>
+            <tr>
+                <th>이름</th>
+                <td>
+                    <input type="text" id="name" size="10" placeholder="이름">
+                </td>    
+            </tr>
+
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <input type="password" id="pw" size="12" placeholder="비밀번호">
+                </td>    
+            </tr>
+
+            <tr>
+                <th>혈액형</th>
+                <td>
+                    <input type="radio" name="blood"value="A">A형
+                    <input type="radio" name="blood"value="B">B형
+                    <input type="radio" name="blood"value="O">O형
+                    <input type="radio" name="blood"value="AB">AB형
+                </td>    
+            </tr>
+
+            <tr>
+                <th>가능언어</th>
+                <td>
+                    <input type="checkbox" name="lang"value="C++">C++
+                    <input type="checkbox" name="lang"value="JAVA">JAVA
+                    <input type="checkbox" name="lang"value="Jquery">Jquery
+                    <input type="checkbox" name="lang"value="Spring">Spring
+                </td>    
+            </tr>
+
+            <tr>
+                <th>입사일자</th>
+                <td>
+                    <input type="date" value="2022-01-01" id="ipsa">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" colspan="2">
+                        <input type="button" id="btnResult" value="결과출력">
+                        </td>
+                    </tr>
+        </table>
+        </form>
+
+        <div id="result">결과출력하는 곳</div>
+</body>
+</html>
