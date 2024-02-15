@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 이미지출력 이라는 버튼을 만들고 버튼을 클릭하면 prompt창이 나온다
+    창에는 인덱스번호를 입력해주세요 라고 출력해주고 0이라고 입력시 0번 이미지가 나온다
+    총 5개의 이미지를 imgArr에 배열형태로 넣고 자유로운 이미지 넣어준다
+    (단, 배열인덱스에 없는 값 입력시 해당번호의 이미지는 없습니다 라고 출력한다)
+    이미지와 버튼은 부트스트랩 이용 -->
+
+    <script>
+        var imgArr = new Array(5);
+
+        imgArr[0]='../image/만화이미지/02.png';
+        imgArr[1]='../image/만화이미지/03.png';
+        imgArr[2]='../image/만화이미지/04.png';
+        imgArr[3]='../image/만화이미지/05.png';
+        imgArr[4]='../image/만화이미지/06.png';
+
+
+        function btnPrompt(){
+            var ans = prompt("인덱스번호를 입력해주세요.");
+            //console.log(ans);
+        
+            if (ans !== null) {  // Check if user clicked cancel
+            var index = parseInt(ans);
+
+            if (!isNaN(index) && index >= 0 && index < imgArr.length) {
+                document.getElementById("result").innerHTML = "<img src='" + imgArr[index] + "'>";
+            } else {
+                document.getElementById("result").innerHTML = "해당번호의 이미지는 없습니다.";
+            }
+        }
+    }
+        </script>
+</body>
+
+
+<button class="btn btn-primary" onclick="btnPrompt()">이미지출력</button>
+<div id="result"></div>
+</html>

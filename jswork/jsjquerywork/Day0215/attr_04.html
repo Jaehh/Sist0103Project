@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var selImage = document.getElementById("selImage");
+            var photo = document.getElementById("photo");
+    
+            var init_image = selImage.value;
+            // Set the initial image source
+            photo.setAttribute("src", init_image);
+    
+            // Event listener for the select box change
+            selImage.onchange = function () {
+                // Set the image source based on the selected value
+                photo.setAttribute("src", this.value);
+            }
+    
+            // Event listener for the "점점작게" button
+            document.getElementById("btnsmall").onclick = function () {
+                // Get the current width of the photo
+                var w = parseInt(photo.getAttribute("width"));
+                w -= 10;
+                // Update the width attribute of the photo
+                photo.setAttribute("width", w);
+            }
+    
+            // Event listener for the "점점크게" button
+            document.getElementById("btnlarge").onclick = function () {
+                // Get the current width of the photo
+                var w = parseInt(photo.getAttribute("width"));
+                w += 10;
+                // Update the width attribute of the photo
+                photo.setAttribute("width", w);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button type="button" id="btnsmall">점점작게</button>
+        <button type="button" id="btnlarge">점점크게</button>
+        <b style="margin-left: 20px;">사진선택: </b>
+        <select id="selImage">
+            <option value="../image/logoImg/shoe01.png">구두 1</option>
+            <option value="../image/logoImg/shoe02.png">구두 2</option>
+            <option value="../image/logoImg/shoe03.png">구두 3</option>
+            <option value="../image/logoImg/shoe04.png" selected>구두 4</option>
+        </select>
+
+        </div>
+
+        <div>
+            <img src="../image/logoImg/shoe01.png" id="photo" width="300">
+            </div>
+</body>
+</html>
