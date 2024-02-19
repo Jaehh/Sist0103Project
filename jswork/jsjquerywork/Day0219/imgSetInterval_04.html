@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #photo{
+            width: 400px;
+            height: 460px;
+            border: 10px groove gray;
+        }
+
+        .msg{
+            font-family: 'Gaegu';
+            font-size: 30px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        </style>
+   <script>
+    window.onload=function(){
+        //3초마다 음식사진이 바뀌게 하기
+        var p=document.getElementById("photo");
+        var m=document.querySelector(".msg");
+        
+        setInterval(function(){
+            //1~20난수
+            var num=parseInt(Math.random()*20)+1;
+
+            //이미지변경
+            p.setAttribute("src","../image/Food/"+num+".jpg");
+        },3000);
+       
+        //3초마다 메세지가 msgarr로 변하기
+        var msgarr=["아름다운 밤이에요","오늘은 비가 오네요","이제는 봄","내가 좋아하는 음식"];
+        var mcolorarr=['magenta','gray','green','cyan','orange','brown'];
+        
+        // setInterval(function(){
+        //     var midx=parseInt(Math.random()*4); //0~3사이 랜덤
+        //     var cidx=parseInt(Math.random()*6);//0~5사이 랜덤
+            
+        //     m.style.color=mcolorarr[cidx];
+        //     m.innerHTML=msgarr[midx];
+        // },1000);
+
+        //화살표함수
+        setInterval(()=>{
+
+            var midx=parseInt(Math.random()*4); //0~3사이 랜덤
+            var cidx=parseInt(Math.random()*6);//0~5사이 랜덤
+            
+            m.style.color=mcolorarr[cidx];
+            m.innerHTML=msgarr[midx];
+        },1000);
+    
+    }
+    </script>
+</head>
+<body>
+    <img src="../image/Food/2.jpg" id="photo">
+    <div class="msg">메세지 출력</div> 
+</body>
+</html>
