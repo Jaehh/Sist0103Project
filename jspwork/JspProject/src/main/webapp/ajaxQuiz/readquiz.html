@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<title>Insert title here</title>
+<style type="text/css">
+	ul li{
+		list-style: none;
+		width:150px;
+		height:50px;
+		text-align:center;
+		line-height:50px;
+		border: 1px solid tomato;
+		margin: 5px;
+		float: left;
+		cursor: pointer;
+		
+	}
+	
+   ul li:hover {
+            background-color: tomato;
+            color: white;
+        }
+	
+	
+</style>
+<script type="text/javascript">
+	//첫번째 Home버튼 누르면 메인이미지 아무거나 하나 나오게
+	//2번째 Food버튼 누르면 json파일 가져오기(div or table)
+	//3번째 Info버튼 누르면 xml파일 가져오기(div or table)
+	$(document).ready(function () {
+		 $("#home").hover(function () {
+		        var s = [
+		            "../image/jquery_img/01.png",
+		           "../image/jquery_img/02.png",
+		            "../image/jquery_img/03.png",
+		            "../image/jquery_img/04.png",
+		            "../image/jquery_img/05.png"
+		        ];
+
+		        var random = Math.floor(Math.random() * s.length);
+		        $("#show").html('<img src="' + s[random] + '" alt="Random Image">');
+		    });
+	
+
+$("#food").hover(function(){
+	
+	//폼태그의 값들을 통째로 읽어온다
+	var data=$("#frm").serialize();
+	//alert(data);
+	
+	$.ajax({
+		type:"get",
+		url:"foodtojson.jsp",
+		dataType:"json",
+		data:data,
+		success:function(data){
+			
+			var s="코드: "+data.code+"<br>";
+			s+="상품명: "+data.name+"<br>";
+			s+="가격: "+data.price+"<br>";
+			s+="색상: "+data.color+"<br>";
+			
+			$("#show").html(s);
+		}
+	})
+})
+	
+	$("#info").hover(function(){
+			
+			var name=$("#name").val();
+			var hp=$("#hp").val();
+			
+			$.ajax({
+				type:"get",
+				url:"infotoxml.jsp",
+				dataType:"xml",
+				data:{"name":name,"hp":hp},
+				success:function(res){
+					var s="<h2>"+$(res).find("name").text()+" 님 데이터를 DB에 추가했어요</h2>";
+					$("#show").html(s);
+				}
+			})
+		}) 
+		
+	})
+</script>
+
+</head>
+<body>
+
+<form id="frm">
+		<table class="table table-bordered style="width: 400px;">
+		<tr>
+		<td class="table-info">상품코드</td>
+		<td>
+		<input type="text" name="scode" id="scode" class="form-control" style="width: 100px;">
+		</td>
+		</tr>
+		
+		<tr>
+		<td class="table-info">상품명</td>
+		<td>
+		<input type="text" name="sname" id="sname" class="form-control" style="width: 120px;">
+		</td>
+		</tr>
+		
+		<tr>
+		<td class="table-info">가격</td>
+		<td>
+		<input type="text" name="price" id="price" class="form-control" style="width: 120px;">
+		</td>
+		</tr>
+		
+		<tr>
+		<th class="table-info">색상</th>
+		<td>
+			<input type="radio" name="color" value="yellow">노랑
+			<input type="radio" name="color" value="magenta">핫핑크
+			<input type="radio" name="color" value="gray">회색
+			<input type="radio" name="color" value="green" checked="checked">초록
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" align="center">
+			
+	</td>
+	</tr>
+		</table>
+	</form>
+	
+	이름: <input type="text" id="name" size="10">
+	핸드폰: <input type="text" id="hp" size="12"><br>
+	
+	<ul>
+	    <li id="home">Home</li>
+		<li id="food">Food</li>
+		<li id="info">Info</li>
+	</ul>
+	
+	<div style="clear: both;"></div>
+	<div id="show"></div>
+		
+
+</body>
+</html>
