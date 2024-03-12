@@ -40,8 +40,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 for(int i=0;i<list.size();i++){
 	QuizShopDto dto = list.get(i);
 	%>
-	<tr>
-	<td align="center" onclick="location.href='detailpage.jsp?num=<%=dto.getNum()%>'" style="cursor:pointer;"><%=i+1 %></td>
+	<tr onclick="location.href='detailpage.jsp?num=<%=dto.getNum()%>'" style="cursor:pointer;">
+	<td align="center"><%=i+1 %></td>
 	<td align="center"><%=dto.getSang_name() %></td>
 	<td align="center"><img src="../image/쇼핑몰사진/<%=dto.getPhoto() %>.jpg" width="50"></td>
 	<td align="center"><%=dto.getPrice() %>원</td>

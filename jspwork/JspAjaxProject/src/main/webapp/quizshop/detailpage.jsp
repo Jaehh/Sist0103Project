@@ -27,29 +27,39 @@
       <table class="table table-bordered" style="width: 600px;">
           <caption align="top"><b>상품 상세 정보</b></caption>
           <tr>
-    
+            <thead>
+             <td rowspan="2" align="center">
+             
+         </td>
+            <th width="100" >상품명</th>
+            <th width="100"> 가격</th>
+            <th width="100" >입고일</th>   
+            </thead>
+            
+            <tbody>
+            <td rowspan="2" align="center">
+             <img src="../image/쇼핑몰사진/<%=dto.getPhoto()%>.jpg" style="width: 100px;">
+         </td>
             <td>
-          <img src="../image/쇼핑몰사진/<%=dto.getPhoto()%>.jpg" style="width: 120px;" align="center">
-            </td>
-            <th width="100" >상품명
             <input type="text" name="sang_name" required="required"
               class="form-control" style="width: 120px;" value="<%=dto.getSang_name()%>">
-            </th>
-         
-            <th width="100" >가격
+            </td>
+            
+            <td>
              <input type="text" name="price" required="required" 
              class="form-control" style="width: 120px; " value="<%=dto.getPrice()%>">
-            </th>
-        
-             <th width="100" >입고일
+            </td>
+           
+              <td>
               <input type="text" name="ipgoday" required="required"
               class="form-control" style="width: 120px; " value="<%=dto.getIpgoday()%>">
-            </th>
+            </td>
+             </tbody>
           </tr>
           
           
           <tr>
-            <td colspan="6" align="center">
+            <td colspan="4" align="center">
             
             <input type="hidden" name="num" value="<%=num%>">
               <input type="button" value="목록" class="btn btn-outline-primary"
