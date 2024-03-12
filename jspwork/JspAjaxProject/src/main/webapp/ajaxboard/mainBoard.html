@@ -7,8 +7,9 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-div.list,divv.detail{
-position:absolute;
+
+div.list,divv.detail,div.updateform{
+		position:absolute;
 		left: 100px;
 		top: 100px;
 }
@@ -26,7 +27,7 @@ position:absolute;
 		
 	}
 	
-	div.list *, div.writeform,div.detail *{
+	div.list *, div.writeform,div.detail *,div.updateform *{
 		font-family:'Nanum Pen Script';
 		font-size: 13pt;
 	}
@@ -47,6 +48,7 @@ $(function(){
 	  
 	  //입력폼 처음에는 안보이게
 	  $("div.writeform").hide();
+	  //수정폼 처음에는 안보이게
 	  $("div.updateform").hide();
 	  
 	  //글쓰기버튼 누르면 보이게
@@ -130,33 +132,26 @@ $(document).on("click","span.detail",function(){
 	});
 });
 
-//수정폼
+//수정폼의 수정버튼 누르면 최종수정
 $("#btnUpdate").click(function(){
 	
-	 var unum = $("#unum").val();
-	    var uwriter = $("#uwriter").val();
-	    var usubject = $("#usubject").val();
-	    var ucontent = $("#ucontent").val();
-	    var uavata = $("#uavata").val();
-
-	    var data = {
-	        "num": unum,
-	        "writer": uwriter,
-	        "subject": usubject,
-	        "content": ucontent,
-	        "avata": uavata
-	    };
-	    
-	    //console.log("Update Data:", data);
+	//serialize(): 폼 안에 있는 데이터를 한번에 읽어옴- id로는 안되고 name만 가능
+	var data =$("#updatefrm").serialize();
+	//alert(data);
+	
 	$.ajax({
 		type:"post",
 		dataType:"html",
 		url:"updateBoard.jsp",
 		data:data,
 		success:function(){
-	
+			
+		    //수정했으니까 다시 리스트 호출
 			list();
+		    
+		    //수정폼 안보이게
 			  $("div.updateform").hide();
+		    //목록 or 디테일 페이지로 이동
 			  $("div.list").show();
 		},
 		
@@ -190,10 +185,12 @@ $(document).on("click",".btnlist",function(){
 	})
 });
 
-//수정버튼
+//디테일페이지에서 수정버튼을 누르면 수정폼 가져오기
 $(document).on("click",".btnupdate",function(){
 	 var num=$(this).attr("num");
+	 //alert(num);
 	 
+	 //수정폼을 출력
 	 $("#unum").val(num);
 	 
 	 $.ajax({
@@ -201,15 +198,18 @@ $(document).on("click",".btnupdate",function(){
 		url:"detailBoard.jsp",
 		dataType:"json",
 		data:{"num":num},
-		success:function(res){
+		success:function(data){
 			
-			$("#unum").val(res.num);
-			$("#uwriter").val(res.writer);
-			$("#usubject").val(res.subject);
-			$("#ucontent").val(res.content);
-			$("#uavata").val(res.avata);
+			//데이터를 받아서 수정폼에 넣어줘야 함
+			$("#unum").val(data.num); //unum에 data에서 넘어온 num을 넣어줌
+			$("#uwriter").val(data.writer);
+			$("#usubject").val(data.subject);
+			$("#ucontent").val(data.content);
+			$("#uavata").val(data.avata);
 			
+			//디테일페이지를 안보이게
 			$("div.detail").hide();
+			//수정폼이 보이게
 			$("div.updateform").show();
 		}
 	 })
@@ -325,8 +325,11 @@ function list(){
    </form>
 </div>
 
+<!-- 수정폼 -->
 <div class="updateform" style="width: 400px;">
+<!-- updatefrm에 있는 데이터를 한번에 보내려면 name으로 보내야 함 -->
    <form id="updatefrm">
+   <!-- num을 hidden으로 줘야함  -->
    <input type="hidden" id="unum" name="unum" value="">
      <table class="table table-bordered">
         <caption align="top"><b>게시글 수정</b></caption>
@@ -349,7 +352,7 @@ function list(){
         <tr>
           <th class="table-primary">아바타</th>
           <td>
-            <select type="hidden" name="uavata" id="uavata" class="form-control" style="width: 100px;">
+            <select name="uavata" id="uavata" class="form-control" style="width: 100px;">
                <option value="../image/avata/b1.png">사랑해</option>
                <option value="../image/avata/b8.png">최고</option>
                <option value="../image/avata/b7.png">신남</option>
@@ -368,7 +371,7 @@ function list(){
         
         <tr>
           <td colspan="2" align="center">
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btn-warning"
             id="btnUpdate">DB수정하기</button>
           </td>
         </tr>

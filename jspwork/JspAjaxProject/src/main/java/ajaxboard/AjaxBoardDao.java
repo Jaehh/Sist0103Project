@@ -65,6 +65,7 @@ public class AjaxBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
+		//순서 상관없음, 물음표 순서대로 바인딩만 잘 해주면 됨
 		String sql ="update ajaxboard set writer=?, subject=?, content=?, avata=? where num=?";
 		
 		try {
@@ -74,7 +75,7 @@ public class AjaxBoardDao {
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
 			pstmt.setString(4, dto.getAvata());
-
+			pstmt.setString(5, dto.getNum());
 			
 			pstmt.execute();
 		} catch (SQLException e) {
