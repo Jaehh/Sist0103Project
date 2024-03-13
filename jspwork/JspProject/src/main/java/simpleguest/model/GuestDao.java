@@ -185,7 +185,7 @@ public class GuestDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
 			
-			pstmt.execute(s);
+			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

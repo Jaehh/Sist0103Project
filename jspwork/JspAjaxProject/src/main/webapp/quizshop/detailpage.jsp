@@ -10,6 +10,16 @@
    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
+<script type="text/javascript">
+function funcDel(num)
+{
+	   var ans=confirm("정말 삭제하시겠습니까?");
+	   if(ans){
+		   location.href='deleteform.jsp?num='+num;
+	   }
+}
+</script>
+
 </head>
 <%
   String num=request.getParameter("num");
@@ -65,10 +75,10 @@
               <input type="button" value="목록" class="btn btn-outline-primary"
               onclick="location.href='shoplist.jsp'"
               style="width: 100px;">
-              <input type="button" value="수정" onclick="location.href=''"
+              <input type="button" value="수정" onclick="location.href='updateform.jsp?num=<%=dto.getNum() %>'"
               class="btn btn-outline-success"
               style="width: 100px;">
-              <input type="button" value="삭제" onclick="location.href=''"
+              <input type="button" value="삭제" onclick="funcDel(<%=dto.getNum() %>)"
               class="btn btn-outline-warning"
               style="width: 100px;">
             </td>
