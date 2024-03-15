@@ -13,9 +13,11 @@
 <title>Insert title here</title>
 </head>
 <%
+    //요청 파라미터로부터 게시글 번호를 가져옵니다.
 	String num = request.getParameter("num");
+     // UploadBoardDao 객체를 생성합니다.
 	UploadBoardDao dao = new UploadBoardDao();
-	//데이터 가져오기
+	// 게시글 데이터를 가져옵니다.
 	UploadBoardDto dto = dao.getData(num);
 	//조회수 증가
 	dao.updateReadCount(num);
@@ -55,9 +57,9 @@
 	  <button type="button" class="btn btn-outline-success" 
 	  onclick="location.href='boardlist.jsp'">목록</button>
 	  <button type="button" class="btn btn-outline-warning" 
-	  onclick="location.href=''">수정</button>
+	  onclick="location.href='updateform.jsp?num=<%=dto.getNum()%>'">수정</button>
 	  <button type="button" class="btn btn-outline-danger" 
-	  onclick="location.href=''">삭제</button>
+	  onclick="location.href='deleteform.jsp?num=<%=dto.getNum()%>'">삭제</button>
 	</div>
 </div>
 </body>

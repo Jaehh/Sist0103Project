@@ -13,9 +13,12 @@
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
-<%
+<%	
+    //UploadBoardDao 인스턴스 생성
 	UploadBoardDao dao = new UploadBoardDao();
+    //모든 게시글 데이터 가져오기
 	List<UploadBoardDto> list = dao.getAllDatas();
+	 // 날짜 형식 지정을 위한 SimpleDateFormat 인스턴스 생성
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 %>
