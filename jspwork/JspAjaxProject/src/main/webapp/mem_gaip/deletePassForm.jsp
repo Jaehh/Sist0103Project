@@ -16,7 +16,7 @@ String m_num = request.getParameter("m_num");
 <body>
 	<div style="margin:200px 200px; width: 300px;">
 	<form action="deletePassAction.jsp" method="post">
-		<div class="d-inline-flex">
+		<div class="input-group">
 		<h5 style="width:100px;">비밀번호</h5>
 		<input type="password" class="form-control" required="required"
 		name="m_pass" style="width:150px;">

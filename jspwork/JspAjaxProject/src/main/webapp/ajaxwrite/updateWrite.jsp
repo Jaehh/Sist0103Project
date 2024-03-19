@@ -1,5 +1,3 @@
-<%@page import="mem_gaip.model.MemgaipDao"%>
-<%@page import="simpleboard.model.SimpleBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,24 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String m_num = request.getParameter("m_num");
-String m_pass = request.getParameter("m_pass");
-
-	MemgaipDao dao = new MemgaipDao();
-	
-	boolean b = dao.isEqualPass(m_num, m_pass);
-
-	if(b){
-		dao.deleteMemgaip(m_num);
-		response.sendRedirect("memList.jsp");
-	}else{%>
-		<script type="text/javascript">
-		alert("비밀번호가 틀렸습니다");
-		history.back();
-		</script>
-		<% }
-	%>
 </body>
 </html>
 

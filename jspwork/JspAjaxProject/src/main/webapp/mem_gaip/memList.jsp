@@ -12,9 +12,16 @@
    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
+
 <style type="text/css">
 
+  img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+  }
 </style>
+
 </head>
 
 <%
@@ -22,11 +29,13 @@
 List<MemgaipDto> list = dao.getMemList();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+String m_num=request.getParameter("m_num");
+
 
 %>
 <body>
 <div style="margin: 50px 100px; width: 1000px;">
-<b>총 <%=list.size() %>명의 회원잉 가입되었습니다</b>
+<b>총 <%=list.size() %>명의 회원이 가입되었습니다</b>
 <button type="button" class="btn btn-warning"
 onclick="location.href='addForm.jsp'" style="float: right;">회원가입</button>
 <br>
@@ -44,18 +53,24 @@ onclick="location.href='addForm.jsp'" style="float: right;">회원가입</button
 <%
 int i=1;
 for(MemgaipDto dto:list){%>
-	<tr>
-	<td align><%=i++ %></td>
-	<td><%=dto.getM_id() %></td>
-	<td>
-	<%
-	if(dto.getM_photo()==null){%>
-		<img alt="" src="../image/연예인사진/noimage.png" class="rounded-circle">
-	<%}else{%>
-		<img alt="" src="../upload/<%=dto.getM_photo() %>" class="rounded-circle">
-	<%}
+ <tr>
+        	     <td align="center" valign="middle"><%=i++ %></td>
+        	     <td align="center" valign="middle"><%=dto.getM_id() %></td>
+        	     <td align="center">
+        	       <%-- <%
+        	         if(dto.getM_photo()==null)
+        	         {%>
+        	        	 <img alt="" src="../image/연예인사진/noimage.png" class="rounded-circle">
+        	         <%}else{
+        	        	 %>
+        	        	  <img alt="" src="../upload/<%=dto.getM_photo() %>" class="rounded-circle">
+        	        	  
+        	        	  
+        	         <%}
+        	       %> --%>
 	
-	%>
+	 <img src="<%=dto.getM_photo()%>" class="rounded-circle">
+	
 	<br>
 	<b><%=dto.getM_name() %></b>
 	</td>
@@ -63,9 +78,10 @@ for(MemgaipDto dto:list){%>
 	<td align="center" valign="middle"><%=sdf.format(dto.getGaipday()) %></td>
 	<td align="center" valign="middle">
 	<button type="button" class="btn btn-success btn-sm"
-	onclick="location.href=''">수정</button>
+	onclick="location.href='updatePassForm.jsp?m_num=<%=dto.getM_num()%>'">수정</button>
 	<button type="button" class="btn btn-danger btn-sm"
-	onclick="location.href='deletePassForm.jsp'">삭제</button>
+    onclick="location.href='deletePassForm.jsp?m_num=<%=dto.getM_num()%>'">삭제</button>
+
 	
 	</td>
 	</tr>
@@ -73,6 +89,7 @@ for(MemgaipDto dto:list){%>
 
 %>
 </table>
+</div>
 </body>
 </html>
 

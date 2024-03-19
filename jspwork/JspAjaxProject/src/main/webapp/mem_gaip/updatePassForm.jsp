@@ -1,5 +1,3 @@
-<%@page import="mem_gaip.model.MemgaipDao"%>
-<%@page import="simpleboard.model.SimpleBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,25 +9,28 @@
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
 <%
+//num을 받아와야 삭제가 가능함
 String m_num = request.getParameter("m_num");
-String m_pass = request.getParameter("m_pass");
-
-	MemgaipDao dao = new MemgaipDao();
-	
-	boolean b = dao.isEqualPass(m_num, m_pass);
-
-	if(b){
-		dao.deleteMemgaip(m_num);
-		response.sendRedirect("memList.jsp");
-	}else{%>
-		<script type="text/javascript">
-		alert("비밀번호가 틀렸습니다");
-		history.back();
-		</script>
-		<% }
-	%>
+%>
+<body>
+	<div style="margin:200px 200px; width: 300px;">
+	<form action="updatePassAction.jsp" method="post">
+		<div class="d-inline-flex">
+		<h5 style="width:100px;">비밀번호</h5>
+		<input type="password" class="form-control" required="required"
+		name="m_pass" style="width:150px;">
+		</div>
+		
+		 <input type="hidden" name="m_num" value="<%=m_num%>">
+		
+		<br>
+		<button type="submit" class="btn btn-warning"
+		style="margin-left: 100px;">수정</button>
+	</form>
+	</div>
 </body>
 </html>
+
+
 

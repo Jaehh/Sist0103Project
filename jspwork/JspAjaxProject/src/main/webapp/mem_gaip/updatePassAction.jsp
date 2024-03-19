@@ -18,11 +18,10 @@ String m_pass = request.getParameter("m_pass");
 
 	MemgaipDao dao = new MemgaipDao();
 	
-	boolean b = dao.isEqualPass(m_num, m_pass);
+	boolean check = dao.isEqualPass(m_num, m_pass);
 
-	if(b){
-		dao.deleteMemgaip(m_num);
-		response.sendRedirect("memList.jsp");
+	if(check){
+		response.sendRedirect("updateForm.jsp?m_num="+m_num);
 	}else{%>
 		<script type="text/javascript">
 		alert("비밀번호가 틀렸습니다");
@@ -32,4 +31,5 @@ String m_pass = request.getParameter("m_pass");
 	%>
 </body>
 </html>
+
 
