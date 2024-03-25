@@ -1,4 +1,3 @@
-<%@page import="data.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,21 +10,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="margin: 100 200px;">
-   <img alt="" src="image/K-060.png">
-   
-   <%
-   String myid=(String)session.getAttribute("myid");
-   MemberDao dao=new MemberDao();
-   String name=dao.getName(myid);
-   
-   %>
-   
-   <br><br>
-   
-   <b><%=name %>님 로그인중</b><br><br>
-   <button type="button" class="btn btn-danger"
-   onclick="location.href='login/logoutaction.jsp'">로그아웃</button>
-</div>
+<%
+  request.setCharacterEncoding("utf-8");
+  String email=request.getParameter("email1")+"@"+request.getParameter("email2");
+%>
+<jsp:useBean id="dao" class="data.dao.MemberDao"/>
+<jsp:useBean id="dto" class="data.dto.MemberDto"/>
+<jsp:setProperty property="*" name="dto"/>
+<%
+	dto.setEmail(email);
+    dao.updateMember(dto);
+    
+    //마이페이지
+    response.sendRedirect("../index.jsp?main=member/mypage.jsp");
+%>
 </body>
 </html>

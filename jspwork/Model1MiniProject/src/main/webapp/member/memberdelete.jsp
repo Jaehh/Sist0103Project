@@ -1,3 +1,4 @@
+<%@page import="data.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,19 +10,16 @@
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
-<%
-	//프로젝트 경로
-	String root = request.getContextPath();
-%>
 <body>
+<!-- 관리자가 강퇴시키는 페이지 -->
+<%
+String num = request.getParameter("num");
 
-	<img alt="" src="<%=root%>/image/banner2.jpg" style="width:900px; "><br><br>
+	MemberDao dao = new MemberDao();
 	
-	<h3>주요 캐릭터 둘러보기</h3>
-	<br>
-	<img alt="" src="<%=root%>/image/1.png" style="margin-left:100px;">
-	<img alt="" src="<%=root%>/image/2.png" style="margin-left:100px;">
-	<img alt="" src="<%=root%>/image/3.png" style="margin-left:100px; margin-bottom:20px;">
+	dao.deleteMember(num);
+	response.sendRedirect("../index.jsp?main=member/memberlist.jsp");
+%>
 </body>
 </html>
 

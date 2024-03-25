@@ -41,7 +41,7 @@
     font-family: 'Noto Serif KR';
     left: 50px;
     top: 300px;
-    border: 5px groove purple;
+    border: 5px groove #7A9FBF;
     border-radius: 30px;
     padding: 20px 20px;
     

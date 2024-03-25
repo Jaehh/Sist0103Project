@@ -12,26 +12,31 @@
 </head>
 <body>
 <%
-  String id=request.getParameter("id");
+  String num=request.getParameter("num");
   String pass=request.getParameter("pass");
-  String cbsave=request.getParameter("cbsave");  //체크안하면 null
   
+//dao 선언
   MemberDao dao=new MemberDao();
-  boolean b=dao.isIdPass(id, pass);
   
-  //아이디비번 맞으면 세션3개저장  로그인메인
+//비번체크후 맞을경우 삭제, 틀릴경우 경고후 이전페이지로 가기
+  boolean b=dao.isEqualPass(num, pass);
+  
   if(b){
-	  session.setMaxInactiveInterval(60*60*8); //8시간..생략시 30분
+	  dao.deleteMember(num);
 	  
-	  session.setAttribute("loginok", "yes");
-	  session.setAttribute("myid", id);
-	  session.setAttribute("saveok", cbsave==null?null:"yes");
-	  
-	  response.sendRedirect("../index.jsp?main=login/loginmain.jsp");
-  }else{
+	  //세션삭제
+	  session.removeAttribute("loginok");
+	  session.removeAttribute("myid");
+	  session.removeAttribute("saveok");
 	  %>
 	  <script type="text/javascript">
-	    alert("아이디 또는 비번이 맞지않습니다");
+	   alert("회원탈퇴성공!!!");
+	   location.href="../index.jsp";
+	  </script>
+  <%}else{%>
+	  
+	  <script type="text/javascript">
+	    alert("비밀번호가 맞지않습니다");
 	    history.back();
 	  </script>
   <%}

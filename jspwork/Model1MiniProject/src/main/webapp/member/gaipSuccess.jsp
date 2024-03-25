@@ -11,15 +11,20 @@
 <%
 String id = request.getParameter("id"); // 회원가입 시 입력한 아이디를 가져옵니다.
 MemberDao dao = new MemberDao();
-MemberDto dto = dao.getId(); // 회원가입 시 입력한 아이디를 기반으로 회원 정보를 가져옵니다.
+String name = dao.getName(id); // 회원가입 시 입력한 아이디를 기반으로 회원 정보를 가져옵니다.
 %>
 
-%>
+
 <body>
-    <div>
-        <%-- 전달받은 회원의 이름을 출력합니다. --%>
-        <h2>회원 가입을 축하합니다, <%= request.getParameter("name") %>님!</h2>
+    <div style="margin: 0 atuo; width: 100%">
+    <img alt="" src="image/11.png">
+    <h2>회원 가입을 축하합니다, <%=name %>님!</h2>
         <p>회원 가입이 성공적으로 완료되었습니다.</p>
+       <br><br>
+       <button type="button" class="btn btn-info"
+        onclick="location.href='index.jsp?main=login/loginmain.jsp'">로그인</button>
+         <button type="button" class="btn btn-info"
+         onclick="location.href='index.jsp'">마이페이지</button>
     </div>
 </body>
 </html>

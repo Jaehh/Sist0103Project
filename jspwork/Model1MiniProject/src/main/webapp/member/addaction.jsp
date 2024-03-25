@@ -13,6 +13,8 @@
 <%
   request.setCharacterEncoding("utf-8");
   String email=request.getParameter("email1")+"@"+request.getParameter("email2");
+ String id = request.getParameter("id");
+ String name = request.getParameter("name");
 %>
 <jsp:useBean id="dao" class="data.dao.MemberDao"/>
 <jsp:useBean id="dto" class="data.dto.MemberDto"/>
@@ -21,7 +23,7 @@
     dto.setEmail(email);
     dao.insertMember(dto);
     
-    String id  = request.getParameter("id");
+   /*  String id  = request.getParameter("id"); */
 
   
     // 회원 가입 성공 페이지로 이동하며, 회원의 이름을 전달합니다.

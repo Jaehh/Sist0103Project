@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%
+  //프로젝트 경로
+  String root=request.getContextPath();
+%>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
@@ -15,19 +19,34 @@
    
    
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+   
 <title>Insert title here</title>
 </head>
+<%
+  String myid=(String)session.getAttribute("myid");
+  String loginok=(String)session.getAttribute("loginok");
+%>
 <style type="text/css">
 #wrap > header {
-    background-color: ;
+    background-color: #7A9FBF;
     padding-bottom: 10px;
     margin-top: 100px;
 }
+
+#main-menu > li:hover > a, #main-menu > li.current-menu-item > a {
+    color: #FFFFFF;
+    font-size:15px;
+}
+
+#main-menu > li > a {
+    color: #eee;
+    font-size: 15px;
+    line-height: 14px;
+    padding: 30px 0;
+    text-decoration: none;
+}
 </style>
-<%
-	//프로젝트 경로
-	String root = request.getContextPath();
-%>
+
 <body>
 	<%-- <a href="<%=root%>/">메인</a>&nbsp;&nbsp;&nbsp;
 	<a href="<%=root%>/">로그인</a>&nbsp;&nbsp;&nbsp;
@@ -58,14 +77,23 @@
 					<li><a href="#">로그인</a>
 					<ul class="sub-menu">
 							<li><a href="index.jsp?main=member/addform.jsp"><i class="icon-wrench"></i>회원가입</a></li>
-							<li><a href="#"><i class="icon-credit-card"></i>회원목록</a></li>
-							<li><a href="#"><i class="icon-gift"></i>마이페이지</a></li>
+							<%
+								  if(loginok!=null && myid.equals("admin")){%>
+									  
+									  <li><a href="index.jsp?main=member/memberlist.jsp"><i class="icon-credit-card"></i> 회원목록</a></li>
+								  <%}
+								%>
+								
+								
+						
+							<li><a href="index.jsp?main=member/mypage.jsp"><i class="icon-gift"></i>마이페이지</a></li>
+							<li><a href="index.jsp?main=login/loginmain.jsp"><i class="icon-gift"></i> 로그인</a></li>
 						</ul>
 						</li>
 					<li class="parent">
 						<a href="#">방명록</a>
 						<ul class="sub-menu">
-							<li><a href="#">회원방명록</a></li>
+							<li><a href="index.jsp?main=memberguest/guestlist.jsp">회원방명록</a></li>
 							<li><a href="#">Medium Image</a></li>
 						</ul>
 					</li>

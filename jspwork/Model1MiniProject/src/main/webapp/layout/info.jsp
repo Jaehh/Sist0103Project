@@ -11,24 +11,24 @@
 <title>Insert title here</title>
 <style type="text/css">
   #mainimg{
-  width:100px;
-  height:100px;
+  width:120px;
+  height:120px;
   border-radius: 100px;
-  margin-top: 30px;
-  margin-left: 20px;
-  border: 1px solid tomato;
+  margin-top: 25px;
+  margin-left: 15px;
+  
   }
 </style>
 
 </head>
 <body>
    <div style="font-size: 13pt; line-height: 25px;">
-     <i class="bi bi-person-circle"></i> 주식회사 메종<br>
+     <i class="bi bi-person-circle"></i> 주식회사 먼작귀<br>
      <i class="bi bi-telephone-inbound"></i>01-1256-8598<br>
-     <i class="bi bi-house-add"></i>서울시 강남구 134 메종<br>
-     <i class="bi bi-envelope-arrow-down"></i>maison@gmail.com<br>
+     <i class="bi bi-house-add"></i>서울시 강남구 134<br>
+     <i class="bi bi-envelope-arrow-down"></i>monjak@gmail.com<br>
      <i class="bi bi-upc-scan"></i>
-     <img src="image/shopimg.png" id="mainimg">
+     <img src="image/33.png" id="mainimg">
    </div>
 </body>
 </html>
