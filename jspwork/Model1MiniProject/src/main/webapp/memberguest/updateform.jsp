@@ -36,13 +36,12 @@
 </script>
 </head>
 <%
-	//num,currentPage
-	String num = request.getParameter("num");
-	String currentPage = request.getParameter("currentPage");
-	
-	GuestDao dao = new GuestDao();
-	GuestDto dto = dao.getData(num);
-	
+   //num,currentPage
+   String num=request.getParameter("num");
+   String currentPage=request.getParameter("currentPage");
+   
+   GuestDao dao=new GuestDao();
+   GuestDto dto=dao.getData(num);
 %>
 <body>
 
@@ -53,10 +52,9 @@ src="<%=(dto.getPhotoname()==null?"":"save/"+dto.getPhotoname())%>">
 <div style="margin: 50px 100px; width: 600px;">
    <form action="memberguest/updateaction.jsp" method="post" enctype="multipart/form-data">
       
-      <!-- num hidden : 페이징처리 시 currentPage도 hidden으로 처리 -->
+      <!--num hidden: 페이징처리시는 currentPage도 hidden처리  -->
       <input type="hidden" name="num" value="<%=num%>">
-      <input type="hidden" name="currentPage" value="<%=currentPage %>">
-      
+      <input type="hidden" name="currentPage" value="<%=currentPage%>">
       <table class="table table-bordered">
         <caption align="top">
           <b>방명록 수정</b>&nbsp;&nbsp;
