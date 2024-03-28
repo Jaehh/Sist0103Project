@@ -17,9 +17,27 @@
 <style>
 .icon {
     font-size: 24px; /* 아이콘 크기 */
-    color: white; /* 아이콘 색상 */
+    color: lightgray; /* 아이콘 색상 */
 
 }
+
+.icon:ative {
+    font-size: 24px; /* 아이콘 크기 */
+    color: red; /* 아이콘 색상 */
+
+}
+
+.btn{
+	background-color:white;
+	border:white;
+}
+
+
+th, td{
+    text-align: center; /* 가운데 정렬 */
+    vertical-align: middle; /* 수직 정렬 */
+}
+
 </style>
 </head>
 <%	
@@ -80,35 +98,57 @@
 	
 %>
 <body>
+
+<script>
+$(".icon").click(function(){
+	if($(this).hasClass("bi-list")){
+		$(this).css("color","red");
+	
+}s
+	
+})
+
+
+</script>
+
+
 <div style="margin: 50px 100px; width:1000px;">
 
 <!-- 리스트형 목록 -->
-<button type="button" class="btn btn-info"
+<button type="button"  class="btn"
 onclick="location.href='boardlist.jsp'">
 <i class="bi bi-list icon" ></i>
 </button>
 
 
 <!-- 앨범형 목록 -->
-<button type="button" class="btn btn-warning" onclick="location.href='boardlist2.jsp'">
+<button type="button" class="btn" onclick="location.href='boardlist2.jsp'">
 <i class="bi bi-grid-fill icon"></i>
 </button>
 
 <h6 class="alert alert-info">총 <%=list.size() %>개의 게시글이 있습니다</h6>
 
-<table class="table table-hover">
+<table class="table">
 <tr>
-<th width="80">번호</th>
-<th width="280">휴게소명</th>
-<th width="160">평점</th>
-<th width="250">영업시간</th>
-<th width="250">조회</th>
+<th rowspan="2" width="80">번호</th>
+<th rowspan="2" width="280">이정</th>
+<th rowspan="2" width="160">전화번호</th>
+<th colspan="2" width="250">편의시설</th>
+<th rowspan="2" width="250">브랜드매장</th>
 </tr>
 
 <%
+
+%>
+
+<tr>
+<th width="250">휴게소</th>
+<th width="250">주유소</th>
+</tr>
+<% 
 for(int i=0;i<list.size();i++){
 	//1번열에 출력할 번호
-	int no = list.size()-i;
+	int num = list.size()-i;
 	
 	//i번째 dto얻기
 	UploadBoardDto dto = list.get(i);
@@ -117,11 +157,12 @@ for(int i=0;i<list.size();i++){
 	<td align="center"><%=no %></td>
 	<td>
 	<a href="content.jsp?num=<%=dto.getNum() %>" style="text-decoration: none;">
-	<img alt="" src="../save/<%=dto.getImgname()%>" style="width: 30px;">
+	<img alt="" src="<%=dto.getImgname()%>" style="width: 30px;">
 	<%=dto.getSubject() %></a>
 	</td>
 	<td><%=dto.getWriter() %></td>
 	<td><%=sdf.format(dto.getWriteday()) %></td>
+	<td><%=dto.getReadcount() %></td>
 	<td><%=dto.getReadcount() %></td>
 	</tr>
 	

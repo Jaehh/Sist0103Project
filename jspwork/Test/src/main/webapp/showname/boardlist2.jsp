@@ -18,8 +18,12 @@
 <style>
 .icon {
     font-size: 24px; /* 아이콘 크기 */
-    color: white; /* 아이콘 색상 */
+     color: lightgray; /* 아이콘 색상 */
+}
 
+.btn{
+	background-color:white;
+	border:white;
 }
 </style>
 
@@ -37,13 +41,13 @@
 <div style="margin: 50px 100px; width:1000px;">
 
 <!-- 리스트형 목록 -->
-<button type="button" class="btn btn-info"
+<button type="button" class="btn"
 onclick="location.href='boardlist.jsp'">
 <i class="bi bi-list icon" ></i>
 </button>
 
 <!-- 앨범형 목록 -->
-<button type="button" class="btn btn-warning" onclick="location.href='boardlist2.jsp'">
+<button type="button" class="btn" onclick="location.href='boardlist2.jsp'">
 <i class="bi bi-grid-fill icon"></i>
 </button>
 
