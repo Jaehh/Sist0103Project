@@ -12,6 +12,36 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
+
+$(function(){
+	
+	//처음 시작시 댓글 호출
+	
+	var num =$("#num").val();
+	//alert(num);
+	
+	$("#btnsend").click(function(){
+		
+		var nick=$("#nickname").val().trim;
+		var content = $("#content").val().trim();
+		
+		$.ajax({
+			type:"get",
+			url:"smartanswer/insertanswer.jsp",
+			dataType:"html",
+			data:{"num":num,"nickname":nick,"content":content},
+			success:function(){
+				//alert("success!!");
+				//초기화
+				$("#nickname").val('');
+				$("#content").val('');
+			}
+		})
+	})
+	
+});
+
+
    function funcdel(num,currentPage){
 	   
 	   //alert(num+","+currentPage);
@@ -22,6 +52,8 @@
 		   location.href='smartboard/delete.jsp?num='+num+"&currentPage="+currentPage;
 	   }
    }
+   
+   function 
 </script>
 </head>
 <body>
@@ -42,6 +74,9 @@
    %>
    
    <div  style="margin: 50px 100px; width: 500px;">
+   
+   <input type="hidden" >
+   
       <table class="table table-bordered">
          <caption align="top"><h3><b>
              <%=dto.getSubject() %>

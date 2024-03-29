@@ -12,20 +12,15 @@
    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<title>Insert title here</title>
+<title>HUEAT</title>
 
 <style>
-.icon {
-    font-size: 24px; /* 아이콘 크기 */
-    color: lightgray; /* 아이콘 색상 */
 
+.icon1 , .icon2{
+width: 30px;
+    height: 30px;
 }
 
-.icon:ative {
-    font-size: 24px; /* 아이콘 크기 */
-    color: red; /* 아이콘 색상 */
-
-}
 
 .btn{
 	background-color:white;
@@ -33,9 +28,11 @@
 }
 
 
-th, td{
+table, th, td{
     text-align: center; /* 가운데 정렬 */
     vertical-align: middle; /* 수직 정렬 */
+    border : 1px solid lightgray;
+    border-collapse: collapse;
 }
 
 </style>
@@ -100,33 +97,52 @@ th, td{
 <body>
 
 <script>
-$(".icon").click(function(){
-	if($(this).hasClass("bi-list")){
-		$(this).css("color","red");
-	
-}s
-	
-})
+
+function List(type){
+		const icon1 = document.querySelector(".icon1");
+		const icon2 = document.querySelector(".icon2");
+		
+		if(type==0){
+		icon1.style.color="red";
+		icon2.style.color="";
+		window.location.href="boardlist.jsp?color=red";
+		}else{
+			icon2.style.color="red";
+			icon1.style.color="";
+			window.location.href="boardlist2.jsp?color=red";
+		}
+		
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const color = urlParams.get('color');
+
+        document.querySelector(".icon1").style.color = "red";
+        document.querySelector(".icon2").style.color = "lightgray";
+   
+});
+
 
 
 </script>
 
 
-<div style="margin: 50px 100px; width:1000px;">
+<div style="margin: 300px 500px; width:1000px;">
 
 <!-- 리스트형 목록 -->
-<button type="button"  class="btn"
-onclick="location.href='boardlist.jsp'">
-<i class="bi bi-list icon" ></i>
+<button type="button" class="btn"
+onclick="List(0)">
+<i class="bi bi-list icon1" style="font-size: 25px; font-weight: bold;"></i>
 </button>
-
 
 <!-- 앨범형 목록 -->
-<button type="button" class="btn" onclick="location.href='boardlist2.jsp'">
-<i class="bi bi-grid-fill icon"></i>
+<button type="button" class="btn" 
+onclick="List(1)">
+<i class="bi bi-grid-fill icon2" style="font-size: 25px; font-weight: bold;"> </i>
 </button>
 
-<h6 class="alert alert-info">총 <%=list.size() %>개의 게시글이 있습니다</h6>
 
 <table class="table">
 <tr>
