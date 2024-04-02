@@ -1,3 +1,4 @@
+<%@page import="data.dao.SmartAnswerDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.SmartDto"%>
 <%@page import="java.util.List"%>
@@ -120,7 +121,14 @@ List<SmartDto>list=dao.getList(startNum, perPage);
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //int count=list.size();
 
-
+//댓글개수넣기
+SmartAnswerDao adao=new SmartAnswerDao();
+for(SmartDto dto:list)
+{
+	//댓글변수에 댓글 총 갯수넣기
+	int acount=adao.getAnswerList(dto.getNum()).size();
+	dto.setAnswercount(acount);
+}
 
 %>
 
@@ -138,7 +146,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
          <th width="200">작성일</th>
          <th width="80">조회</th>
       </tr>
-
+      
       <%
         if(totalCount==0){%>
         	<tr>
@@ -153,28 +161,41 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         		  <td align="center">
         		  <input type="checkbox" value="<%=dto.getNum()%>" class="alldel">&nbsp;&nbsp;
         		  <%=no-- %></td>
-        		  <td><a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">
-        		  <span style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 250px; display: block;"><%=dto.getSubject() %></span></a></td>
+        		  <td>
+        		  
+        		  <a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>" >
+        		  
+        		  <%=dto.getSubject() %></a>
+        		  
+        		  <%
+        		    if(dto.getAnswercount()>0)
+        		    {%>
+        		    	<a href="index.jsp?main=smartboard/contentview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>"
+        		    	style="color: red;">
+        		    	[<%=dto.getAnswercount() %>]</a>
+        		    <%}
+        		  %>
+        		  
+        		  </td>
         		  <td align="center"><%=dto.getWriter() %></td>
         		  <td align="center"><%=sdf.format(dto.getWriteday()) %></td>
         		  <td align="center"><%=dto.getReadcount() %></td>
         		</tr>
-        	<% }%>
+        	<%}%>
         	
+        	<tr>
+        	  <td colspan="5">
+        	     <input type="checkbox" class="alldelcheck"> 전체선택
+        	     <span style="float: right;">
+        	        <button type="button" class="btn btn-danger btn-sm" id="btndel"><i class="bi bi-x-circle"></i>삭제</button>&nbsp;
+        	        <button type="button" class="btn btn-info btn-sm"
+   onclick="location.href='index.jsp?main=smartboard/smartform.jsp'"><i class="bi bi-pencil-fill"></i>글쓰기</button>
+        	     </span>
+        	  </td>
+        	</tr>
         	
-        <% }%>
-      
-      <tr>
-	  <td colspan="5">
-	     <input type="checkbox" class="alldelcheck"> 전체선택
-	     <span style="float: right;">
-	        <button type="button" class="btn btn-danger btn-sm" id="btndel"><i class="bi bi-x-circle"></i>삭제</button>&nbsp;
-	        <button type="button" class="btn btn-info btn-sm"
-onclick="location.href='index.jsp?main=smartboard/smartform.jsp'"><i class="bi bi-pencil-fill"></i>글쓰기</button>
-	     </span>
-	  </td>
-	</tr>
-
+        <%}
+      %>
    </table>
 </div>
 

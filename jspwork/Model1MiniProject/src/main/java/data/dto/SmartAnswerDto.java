@@ -10,8 +10,9 @@ public class SmartAnswerDto {
 	private String nickname;
 	private String content;
 	private Timestamp wirteday;
+	private int answercount; //댓글개수저장
 	
-	
+
 	public String getIdx() {
 		return idx;
 	}
