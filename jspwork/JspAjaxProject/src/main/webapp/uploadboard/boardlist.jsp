@@ -1,7 +1,9 @@
+
 <%@page import="uploadboard.data.UploadBoardDto"%>
+<%@page import="uploadboard.data.UploadBoardDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
-<%@page import="uploadboard.data.UploadBoardDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>

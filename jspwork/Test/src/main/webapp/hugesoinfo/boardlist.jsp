@@ -1,7 +1,9 @@
-<%@page import="uploadboard.data.UploadBoardDto"%>
+
+<%@page import="data.dto.HugesoInfoDto"%>
+<%@page import="data.dao.HugesoInfoDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
-<%@page import="uploadboard.data.UploadBoardDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,13 +37,21 @@ table, th, td{
     border-collapse: collapse;
 }
 
+/* table tr:not(:first-child):not(:nth-child(2)):hover { /* <tr>의 첫번째,두번째 형제 요소 제외하고 나머지 영역에만 css 적용(헤더 제외) */
+	 background-color: lightgray;
+} */
+
+tr:hover { /* <tr>의 첫번째,두번째 형제 요소 제외하고 나머지 영역에만 css 적용(헤더 제외) */
+	 background-color: lightgray;
+} 
+
 </style>
 </head>
 <%	
     //UploadBoardDao 인스턴스 생성
-	UploadBoardDao dao = new UploadBoardDao();
+	HugesoInfoDao dao = new HugesoInfoDao();
     //모든 게시글 데이터 가져오기
-	List<UploadBoardDto> list = dao.getAllDatas();
+	List<HugesoInfoDto> list = dao.getAllDatas();
 	 // 날짜 형식 지정을 위한 SimpleDateFormat 인스턴스 생성
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	 
@@ -90,7 +100,7 @@ table, th, td{
 	no=totalCount-(currentPage-1)*perPage;
 
 	//페이지에서 보여질 글만 가져오기
-	List<UploadBoardDto>list2=dao.getPagingList(startNum, perPage);
+	List<HugesoInfoDto>list2=dao.getPagingList(startNum, perPage);
 
 	
 %>
@@ -129,26 +139,43 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<div style="margin: 300px 500px; width:1000px;">
+<div style="margin: 400px 200px; width:1500px;">
+
+<div style=" width:1500px;   text-align: center;">
+<img src="../image/Food/1.jpg" alt="수면실" width="50" height="50">수면실
+<img src="../image/Food/2.jpg" alt="샤워실" width="50" height="50">샤워실
+<img src="../image/Food/3.jpg" alt="세탁실" width="50" height="50">세탁실
+<img src="../image/Food/4.jpg" alt="세차장" width="50" height="50">세차장
+<img src="../image/Food/5.jpg" alt="경정비" width="50" height="50">경정비
+<img src="../image/Food/6.jpg" alt="수유실" width="50" height="50">수유실
+<img src="../image/Food/7.jpg" alt="쉼터" width="50" height="50">쉼터
+<img src="../image/Food/8.jpg" alt="ATM" width="50" height="50">ATM
+<img src="../image/Food/9.jpg" alt="매점" width="50" height="50">매점
+<img src="../image/Food/10.jpg" alt="약국" width="50" height="50">약국
+<img src="../image/Food/11.jpg" alt="약국" width="50" height="50">기타
+
+
+</div>
+
 
 <!-- 리스트형 목록 -->
 <button type="button" class="btn"
-onclick="List(0)">
+onclick="List(0)" style=" float: right;">
 <i class="bi bi-list icon1" style="font-size: 25px; font-weight: bold;"></i>
 </button>
 
 <!-- 앨범형 목록 -->
 <button type="button" class="btn" 
-onclick="List(1)">
+onclick="List(1)" style=" float: right;">
 <i class="bi bi-grid-fill icon2" style="font-size: 25px; font-weight: bold;"> </i>
 </button>
 
 
 <table class="table">
 <tr>
-<th rowspan="2" width="80">번호</th>
-<th rowspan="2" width="280">이정</th>
-<th rowspan="2" width="160">전화번호</th>
+<th rowspan="2" width="250">휴게소</th>
+<th rowspan="2" width="400">이정</th>
+<th rowspan="2" width="250">전화번호</th>
 <th colspan="2" width="250">편의시설</th>
 <th rowspan="2" width="250">브랜드매장</th>
 </tr>
@@ -163,27 +190,78 @@ onclick="List(1)">
 </tr>
 <% 
 for(int i=0;i<list.size();i++){
-	//1번열에 출력할 번호
-	int num = list.size()-i;
-	
-	//i번째 dto얻기
-	UploadBoardDto dto = list.get(i);
-	%>
-	<tr>
-	<td align="center"><%=no %></td>
-	<td>
-	<a href="content.jsp?num=<%=dto.getNum() %>" style="text-decoration: none;">
-	<img alt="" src="<%=dto.getImgname()%>" style="width: 30px;">
-	<%=dto.getSubject() %></a>
-	</td>
-	<td><%=dto.getWriter() %></td>
-	<td><%=sdf.format(dto.getWriteday()) %></td>
-	<td><%=dto.getReadcount() %></td>
-	<td><%=dto.getReadcount() %></td>
-	</tr>
-	
+    //1번열에 출력할 번호
+    int num = list.size()-i;
+    
+    //i번째 dto얻기
+    HugesoInfoDto dto = list.get(i);
+    %>
+    <tr>
+    <td align="center"><%=dto.getH_name() %></td>
+    <td><%=dto.getH_addr() %> </td>
+    <td><%=dto.getH_hp() %> </td>
+    <td>
+        <% 
+        String pyeons = dto.getH_pyeon(); //dto에 있는 편의시설 문자열을 pyeons에 넣어줌
+        String[] pyeonArray = pyeons.split(","); //콤마를 기준으로 편의시설 문자열을 분리하여 배열 pyeonArray에 넣어줌
+        for(String pyeon : pyeonArray){
+        	 switch(pyeon){
+        	 case "수면실":{
+        		 %><img src="../image/Food/1.jpg" alt="수면실" width="50" height="50"><%
+        	 break;
+        	 }
+        	 case "샤워실":{
+        		 %><img src="../image/Food/2.jpg" alt="샤워실" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "세탁실":{
+        		 %><img src="../image/Food/3.jpg" alt="세탁실" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "세차장":{
+        		 %><img src="../image/Food/4.jpg" alt="세차장" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "경정비":{
+        		 %><img src="../image/Food/5.jpg" alt="경정비" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "수유실":{
+        		 %><img src="../image/Food/6.jpg" alt="수유실" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "쉼터":{
+        		 %><img src="../image/Food/7.jpg" alt="쉼터" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "ATM":{
+        		 %><img src="../image/Food/8.jpg" alt="ATM" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "매점":{
+        		 %><img src="../image/Food/9.jpg" alt="매점" width="50" height="50"><%
+        				 break;
+        	 }
+        	 case "약국":{
+        		 %><img src="../image/Food/10.jpg" alt="약국" width="50" height="50"><%
+        				 break;
+        	 }
+        	 default:{ /* 기타 */
+        		 %><img src="../image/Food/11.jpg" alt="약국" width="50" height="50"><%
+        		 break;
+        	 }
+        	 
+        	 }
+          /*   out.println(pyeon); */ // 각 편의시설 출력
+        }
+        %>
+    </td>
+    <td></td>
+    <td><%=dto.getH_brand() %></td>
+    </tr>
 <%}
 %>
+
 </table>
 
 

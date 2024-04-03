@@ -1,5 +1,5 @@
-<%@page import="uploadboard.data.UploadBoardDto"%>
-<%@page import="uploadboard.data.UploadBoardDao"%>
+<%@page import="hugesoinfo111.data.UploadBoardDto"%>
+<%@page import="hugesoinfo111.data.UploadBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>

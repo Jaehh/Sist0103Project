@@ -30,13 +30,20 @@
       color: white;
       border-radius: 100px;
       z-index: 10;
-      left: -10px;
+      left: -15px;
       top: 10px;
       position: relative;
       text-align: center;
       line-height: 30px;
    }
 </style>
+<script type="text/javascript">
+$(function(){
+	$("div.cart").click(function(){
+		location.href="index.jsp?main=shop/mycart.jsp";
+	})
+})
+</script>
 </head>
 <%
   //프로젝트 경로

@@ -1,6 +1,6 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="uploadboard.data.UploadBoardDao"%>
-<%@page import="uploadboard.data.UploadBoardDto"%>
+<%@page import="hugesoinfo111.data.UploadBoardDao"%>
+<%@page import="hugesoinfo111.data.UploadBoardDto"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>

@@ -11,6 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+img.photo{
+	width: 60px;
+	height: 80px;
+	border: 2px solid gray;
+}
+
+div.sangpum{
+cursor:pointer;
+}
+</style>
 </head>
 <%
   String id=(String)session.getAttribute("myid");
@@ -18,7 +29,37 @@
   List<HashMap<String,String>> list=dao.getCartList(id);
 %>
 <body>
-<h4><%=id %>님의 장바구니</h4>
-<h4><%=list.size() %></h4>
+<h4 class="alert alert-info" style="width:1000px;"><%=id %>님의 장바구니</h4>
+
+<table class="table table-striped" style="width:1000px;">
+	<tr>
+	<th style="width:30px;"><input type="checkbox" id="allcheck"></th>
+	<th style="width:200px;">상품정보</th>
+	<th style="width:200px;">상품금액</th>
+	</tr>
+	
+	<%
+	for(int i=0;i<list.size();i++){
+		HashMap<String,String> map = list.get(i);
+		
+		//사진얻기
+		String photo = map.get("photo");
+		%>
+		
+		<tr>
+		<td>
+			<input type="checkbox" name="idx" idx="<%=map.get("idx")%>">
+		</td>
+		<td>
+			<div class="sangpum" shopnum="<%=map.get("shopnum")%>">
+				<img alt="" src="shopsave/<%=photo%>" class="photo" align="left" hspace="20">
+			</div>
+		</td>
+		</tr>
+	<% }
+	
+	%>
+	
+</table>
 </body>
 </html>
