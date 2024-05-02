@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>request에 저장된 메세지 출력: ${s_msg }</h2>
-	<h2>session에 저장된 아이디 출력: ${sessionScope.myid }</h2>
+<h2>3번 폼으로부터 입력된값</h2>
+${data }
 </body>
 </html>

@@ -1,17 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>ÄûÁîÀÌ¹ÌÁöÃâ·Â_res2°³ ¾Æ¹«°Å³ª, WEB-INFÀÇ image¿¡¼­ ¾Æ¹«°Å³ª 2°³ Ãâ·ÂÇÒ °Í</h2>
+	<h2>í€´ì¦ˆì´ë¯¸ì§€ì¶œë ¥_res2ê°œ ì•„ë¬´ê±°ë‚˜, WEB-INFì˜ imageì—ì„œ ì•„ë¬´ê±°ë‚˜ 2ê°œ ì¶œë ¥í•  ê²ƒ</h2>
 	
 	<h2>${quiz_title}</h2>
 	
-	<h2>¸®¼Ò½º Æú´õ</h2>
+	<h2>ë¦¬ì†ŒìŠ¤ í´ë”</h2>
 	<img alt="" src="../../res/b5.png">
 	<img alt="" src="../../res/image1/b7.png">
 	

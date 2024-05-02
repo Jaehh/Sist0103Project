@@ -12,7 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>request에 저장된 메세지 출력: ${s_msg }</h2>
-	<h2>session에 저장된 아이디 출력: ${sessionScope.myid }</h2>
+
+<h1 class="alert alert-info">result1.jsp 파일입니다</h1>
+<h2>HelloController 로부터 포워드</h2>
+<b>이름: ${requestScope.name }</b><br><!--requestScope는 생략가능  -->
+<b>주소: ${requestScope.addr }</b>
 </body>
 </html>

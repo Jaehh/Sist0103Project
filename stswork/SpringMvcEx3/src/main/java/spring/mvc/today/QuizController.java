@@ -1,6 +1,7 @@
 package spring.mvc.today;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -10,9 +11,9 @@ public class QuizController {
 	public ModelAndView quizProcess() {
 		ModelAndView model = new ModelAndView();
 		
-		model.addObject("quiz_title", "**ÀÌ¹ÌÁö Ãâ·Â ÄûÁî**")
+		model.addObject("quiz_title", "**ì´ë¯¸ì§€ ì¶œë ¥ í€´ì¦ˆ**");
 	
-		//Æ÷¿öµåÇÒ view
+		//í¬ì›Œë“œí•  view
 		model.setViewName("quizResult");
 		return model;
 	}

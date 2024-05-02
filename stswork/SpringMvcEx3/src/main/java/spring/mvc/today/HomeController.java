@@ -1,9 +1,12 @@
 package spring.mvc.today;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -13,15 +16,15 @@ public class HomeController {
 	public String home(Model model) {
 		
 		model.addAttribute("msg","HomeController");
-		model.addAttribute("today",new date());
+		model.addAttribute("today",new Date());
 		
-		return "home";
+		return "home"; //WEB-INF/day0502/home.jsp
 	}
 	
 	@GetMapping("apple/list")
 	public String applelist(Model model) {
-		model.addAttribute("stuName","ÀÌÁø¿ì");
-		model.addAttribute("stuLoc","4°­ÀÇÀå");
+		model.addAttribute("stuName","ì´ì§„ìš°");
+		model.addAttribute("stuLoc","4ê°•ì˜ì¥");
 		
 		return "stuResult1";
 	}
@@ -29,14 +32,14 @@ public class HomeController {
 	@GetMapping("/banana/insert")
 	public ModelAndView banana() {
 		
-		//ModelAndView´Â request¿¡ ÀúÀåÇÏ±â À§ÇÑ Model°ú Æ÷¿öµå¸¦ À§ÇÑ View¸¦ ÇÕÃÄ³õÀº Å¬·¡½º
+		//ModelAndViewëŠ” requestì— ì €ì¥í•˜ê¸° ìœ„í•œ Modelê³¼ í¬ì›Œë“œë¥¼ ìœ„í•œ Viewë¥¼ í•©ì³ë†“ì€ í´ë˜ìŠ¤
 		ModelAndView mview = new ModelAndView();
 		
-		//request¿¡ ÀúÀå
+		//requestì— ì €ì¥
 		mview.addObject("java",88);
 		mview.addObject("mysql", 77);
 		
-		//Æ÷¿öµåÇÒ jspÆÄÀÏ ÁöÁ¤
+		//í¬ì›Œë“œí•  jspíŒŒì¼ ì§€ì •
 		mview.setViewName("scoreResult");
 		
 		return mview;
@@ -45,10 +48,10 @@ public class HomeController {
 	@GetMapping("/orange/select")
 	public String orange(Model model,HttpSession session) {
 		
-		//request¿¡ ÀúÀå
-		model.addAttribute("s_msg", "½ºÇÁ¸µ ¸ÅÇÎ ¿¬½ÀÁß!!");
+		//requestì— ì €ì¥
+		model.addAttribute("s_msg", "ìŠ¤í”„ë§ ë§¤í•‘ ì—°ìŠµì¤‘!!");
 		
-		//session¿¡ ÀúÀå
+		//sessionì— ì €ì¥
 		session.setAttribute("myid", "admin");
 		return "orangeResult";
 	}
