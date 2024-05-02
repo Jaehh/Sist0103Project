@@ -40,8 +40,8 @@ table, th, td{
 /* table tr:not(:first-child):not(:nth-child(2)):hover { /* <tr>의 첫번째,두번째 형제 요소 제외하고 나머지 영역에만 css 적용(헤더 제외) */
 	 background-color: lightgray;
 } */
-
-tr:hover { /* <tr>의 첫번째,두번째 형제 요소 제외하고 나머지 영역에만 css 적용(헤더 제외) */
+ /* <tr>의 첫번째,두번째 형제 요소 제외하고 나머지 영역에만 css 적용(헤더 제외) */
+tr:hover {
 	 background-color: lightgray;
 } 
 

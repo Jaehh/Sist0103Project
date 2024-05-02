@@ -43,6 +43,40 @@
     cursor:pointer;
   }
 
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+ 
+.star-rating input {
+  display: none;
+}
+ 
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+ 
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+ 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+
+
+
 </style>
 
 <script type="text/javascript">
@@ -52,41 +86,46 @@
 	  
 	  //ajax insert
 	  var num=$("#num").val();
-	  //alert(num);
+	  alert(num);
 	  
-	  $("#btnasend").click(function(){
-		  
-		  var nickname=$("#nickname").val().trim();
-		  var content=$("#content").val().trim();
-		  
-		   if(nickname=='')
-			{
-			   alert("닉네임을 입력후 저장해주세요");
-			   return;
-			}
-		   if(content=='')
-			{
-			   alert("댓글내용을 입력후 저장해주세요");
-			   return;
-			}
-		  
-		  $.ajax({
-			  
-			  type:"get",
-			  url:"../simpleboardanswer/insertAnswer.jsp",
-			  dataType:"html",
-			  data:{"num":num,"nickname":nickname,"content":content},
-			  success:function(){
-				 //기존입력값 지우기
-				 $("#nickname").val('');
-				 $("#content").val('');
-				 
-				 list();
-			  }
-		  });
-	  });
+	  // 저장 버튼 클릭 시 실행되는 함수
+	    $("#btnasend").click(function() {
+	        // 입력된 닉네임과 선택된 별점을 가져옴
+	        var nickname = $("#nickname").val().trim();
+	        var content = $("input[name='content']:checked").val();
+	        
+	        // 닉네임이나 별점이 입력되지 않았을 경우 알림 후 함수 종료
+	        if (nickname === '') {
+	            alert("닉네임을 입력한 후 저장해주세요.");
+	            return;
+	        }
+	        if (!content) {
+	            alert("별점을 선택한 후 저장해주세요.");
+	            return;
+	        }
+	        
+	        // AJAX 요청을 통해 서버에 데이터 전송
+	        $.ajax({
+	            type: "get",
+	            url: "../simpleboardanswer/insertAnswer.jsp",
+	            dataType: "html",
+	            data: { "num": $("#num").val(), "nickname": nickname, "content": content },
+	            success: function() {
+	                // 입력값 초기화
+	                $("#nickname").val('');
+	                $("input[name='content']").prop('checked', false);
+	                
+	                // 댓글 목록 다시 불러오기
+	                list();
+	            },
+	            error: function(xhr, status, error) {
+	                // AJAX 요청 실패 시 에러 메시지 출력
+	                console.error("AJAX Error: " + error);
+	            }
+	        });
+	    });
 	  
-	  // 리스트의 삭제 이모티콘 클릭 시 (이벤트로 생겨났기 때문에동적으로 처리) 
+	  /* // 리스트의 삭제 이모티콘 클릭 시 (이벤트로 생겨났기 때문에동적으로 처리) 
 	 $(document).on("click", ".adel", function(){
 		  
 		  var idx = $(this).attr("idx");
@@ -137,44 +176,55 @@ $(document).on("click", ".amod", function(){
         }
     });
 });
+ */
+	  
+	  
+  
+  
+function list() {
+    console.log("list num=" + $("#num").val());
+    
+    $.ajax({
+        type: "get",
+        url: "../simpleboardanswer/listAnswer.jsp",
+        dataType: "json",
+        data: { "num": $("#num").val() },
+        success: function(res) {
+            // 댓글 갯수 출력
+            $("b.acount>span").text(res.length);
+            
+            
+            var s = ""; // 변수 s를 빈 문자열로 초기화
+            $.each(res, function(idx, item) {
+                s += "<div>" + item.nick + ": ";
+                
+                // 별점에 따라 별표시 추가
+                var starsHTML = "";
+                for (var i = 5; i > 0; i--) {
+                    if (i <= item.content) {
+                        starsHTML += "<span class='star'>★</span>";
+                    } else {
+                        starsHTML += "<span class='star-empty'>☆</span>";
+                    }
+                }
+                s += "<div class='star-rating'>" + starsHTML + "</div>";
+                
+                s += "<span class='aday'>" + item.writeday + "</span>";
+                s += "<i class='bi bi-pencil-square amod' idx=" + item.idx + "></i>";
+                s += "<i class='bi bi-trash adel' idx=" + item.idx + "></i>";
+                s += "</div>";
+            });
 
-	  
-	  
-  
-  
-  function list()
-  {
-	  console.log("list num="+$("#num").val());
-	  
-	  $.ajax({
-		  
-		  type:"get",
-		  url:"../simpleboardanswer/listAnswer.jsp",
-		  dataType:"json",
-		  data:{"num":$("#num").val()},
-		  success:function(res){
-			 
-			  //댓글갯수출력
-			  $("b.acount>span").text(res.length);
-			  
-			  var s="";
-			  $.each(res,function(idx,item){
-				  
-				  s+="<div>"+item.nick+":  "+item.content;
-				  s+="<span class='aday'>"+item.writeday+"</span>";
-				  s+="<i class='bi bi-pencil-square amod' idx="+item.idx+"></i>";
-				  s+="<i class='bi bi-trash adel' idx="+item.idx+"></i>";
-			  });
-			  $("div.alist").html(s);
-			  
-		  },
-		  error: function(xhr, status, error) {
-	            console.error("AJAX Error: " + error);
-	        }
-		  
-	  });
-  } 
-	  });
+            $("div.alist").html(s);
+        },
+        error: function(xhr, status, error) {
+            // AJAX 요청 실패 시 에러 메시지 출력
+            console.error("AJAX Error: " + error);
+        }
+    });
+}
+
+  });
 </script>
 
 </head>
@@ -219,20 +269,40 @@ $(document).on("click", ".amod", function(){
          <div class="aform input-group">
             <input type="text" id="nickname" class="form-control"
             style="width: 80px;" placeholder="닉네임">
-            <input type="text" id="content" class="form-control"
-            style="width: 300px; margin-left: 10px;" placeholder="댓글메세지">
+         
+            
+            
+    <div class="star-rating space-x-4 mx-auto" id="content">
+	<input type="radio" id="5-stars" name="content" value="5" v-model="ratings" />
+	<label for="5-stars" class="star pr-4">★</label>
+	<input type="radio" id="4-stars" name="content" value="4" v-model="ratings" />
+	<label for="4-stars" class="star">★</label>
+	<input type="radio" id="3-stars" name="content" value="3" v-model="ratings" />
+	<label for="3-stars" class="star">★</label>
+	<input type="radio" id="2-stars" name="content" value="2" v-model="ratings" />
+	<label for="2-stars" class="star">★</label>
+	<input type="radio" id="1-star" name="content" value="1" v-model="ratings" />
+	<label for="1-star" class="star">★</label>
+    </div>
+            
+            
+            
             
             <button type="button" id="btnasend"
             class="btn btn-info btn-sm" style="margin-left: 10px;">저장</button>
          </div>
          
          <!-- 수정창 -->
-          <div class="aupdateform input-group">
+         <%--  <div class="aupdateform input-group">
           <input type="hidden" id="idx">
             <input type="text" id="unickname" class="form-control"
             style="width: 80px;" placeholder="닉네임">
             <input type="text" id="ucontent" class="form-control"
             style="width: 300px; margin-left: 10px;" placeholder="댓글메세지">
+            
+            
+            
+            
             
             <button type="button" id="btnaUsend"
             class="btn btn-warning btn-sm" style="margin-left: 10px;">수정</button>
@@ -251,7 +321,7 @@ $(document).on("click", ".amod", function(){
          <button type="button" class="btn btn-outline-danger btn-sm"
          onclick="location.href='deletepassform.jsp?num=<%=dto.getNum()%>'"><i class="bi bi-trash"></i>삭제</button>
        </td>
-     </tr>
+     </tr> --%>
   </table>
 </div>
 <body>
