@@ -2,21 +2,20 @@ package spring.day0430.anno2;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MyFruit {
 
-	//@Autowired //ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÑ Å¬·¡½º°¡ ÇÑ°³ÀÏ°æ¿ì´Â ÀÚµ¿ÁÖÀÔÀÌ µÇ´Âµ¥ ¸¸¾à ±¸ÇöÇÑ Å¬·¡½º°¡ 2°³ÀÌ»óÀÌ¸é ÀÚµ¿ÁÖÀÔ¿¡ ¹®Á¦°¡ »ý±ä´Ù
-	//Á¤È®ÇÏ°Ô beanÀÇ ÀÌ¸§À¸·Î ÁÖÀÔÇÏ·Á¸é..
+	//@Autowired //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Ì¸ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½È®ï¿½Ï°ï¿½ beanï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½..
 	//@Resource(name = "tManggo")
 	@Resource(name = "vietnamManggo")
 	Manggo mg;
 	
 	public void writeManggo()
 	{
-		System.out.println("***³»°¡ ÁÁ¾ÆÇÏ´Â ¸Á°í´Â***");
+		System.out.println("***ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½***");
 		mg.writeMangoName();
 	}
 }
