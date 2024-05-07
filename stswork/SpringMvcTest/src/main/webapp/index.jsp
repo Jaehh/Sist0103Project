@@ -12,9 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
- <ul>
+<!--  <ul>
       <li><a href="info/myform">입력폼</a></li>
-   </ul>
+   </ul> -->
+   <c:redirect url ="info/myform"/>
 </body>
 </html>
 

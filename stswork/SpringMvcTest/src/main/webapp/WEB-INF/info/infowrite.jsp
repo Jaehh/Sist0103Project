@@ -15,7 +15,7 @@
 <h3 style="color:${dto.color}">
 이름: ${dto.name}<br>
 취미:
-<c:choose>
+<%-- <c:choose>
     <c:when test="${empty dto.hobby}">
         없음<br>
     </c:when>
@@ -24,7 +24,15 @@
             [${hobby}]&nbsp;
         </c:forEach><br>
     </c:otherwise>
-</c:choose> 
+</c:choose>  --%>
+
+<c:if test="${empty dto.hobby }">없음</c:if>
+<c:if test="${!empty dto.hobby }">
+<c:forEach var="hobby" items="${dto.hobby}">
+            [${hobby}]&nbsp;
+        </c:forEach>
+</c:if>
+<br>
 
 가장 재미있는 언어: ${dto.lang}
 </h3>
