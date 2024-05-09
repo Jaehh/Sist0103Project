@@ -12,7 +12,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:redirect url="samsung/list"/>
+<%-- <c:redirect url="samsung/list"/> --%>
+
+<div style="margin: 100px 200px; display: flex; flex-direction: row;">
+    <button type="button" class="btn btn-info" 
+    onclick="location.href='samsung/list'">차량등록정보</button>
+    <button type="button" class="btn btn-info" 
+    onclick="location.href='carmember/list'" style="margin-left: 10px;">고객정보</button>
+</div>
+
 </body>
 </html>
 
