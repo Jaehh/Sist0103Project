@@ -5,5 +5,6 @@
   <configuration>
   	<typeAliases>
   		<typeAlias alias="memdto" type="spring.db.member.MemberDto"/>
+  		<typeAlias alias="bdto" type="spring.db.board.BoardDto"/>
   	</typeAliases>
   </configuration>

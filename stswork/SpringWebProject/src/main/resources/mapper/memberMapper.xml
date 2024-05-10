@@ -17,4 +17,17 @@
 	<insert id="insertOfMem" parameterType="memdto">
 	  insert into smember (name,id,pass, hp, gaipday) values (#{name},#{id},#{pass}, #{hp},now())
 	</insert>
+	<!-- 수정 -->
+	<select id="selectOneOfMember" parameterType="String" resultType="memdto">
+		select * from smember where num=#{num}
+	</select>
+	<select id="passCheckOfMember" parameterType="HashMap" resultType="int">
+		select count(*) from smember where num=#{num} and pass=#{pass}
+	</select>
+	<update id="updateOfMember" parameterType="memdto">
+		update smember set name=#{name},hp=#{hp} where num=#{num}
+	</update>
+	<delete id="deleteOfMember" parameterType="String">
+		delete from smember where num=#{num}
+	</delete>
  </mapper>

@@ -13,7 +13,7 @@
 </head>
 <body>
   <div style="margin: 50px 100px; width: 800px;" >
- <div>
+ <div style="margin-left:700px;">
      <button type="button" class="btn btn-info"
      onclick="location.href='writeform'">회원가입</button>
   </div>
@@ -23,11 +23,13 @@
     <h5 class="alert alert-danger">저장된 회원의 정보가 없습니다</h5>
   </c:if>
   <c:if test="${totalCount>0 }">
-     <h5 class="alert alert-danger">총 ${totalCount }개의 회원정보가 있습니다</h5>
-     
+   <caption align="top">
+   <b style="color: lightgray;"><span style="font-size:25px; color: gray;">회원목록</span> 
+   (${totalCount }명) </b></caption>
+
      <hr>
      <table class="table table-bordered">
-        <tr class="table-success">
+         <tr class="table-light" style="text-align: center;">
                      <th width="60">번호</th>
 					<th width="100">회원명</th>
 					<th width="120">아이디</th>
@@ -38,14 +40,14 @@
         
         <c:forEach var="dto" items="${list }" varStatus="i">
            <tr>
-             <td>${i.count }</td>
-             <td>${dto.name }</td>
-             <td>${dto.id }</td>
-             <td>${dto.hp}</td>
+             <td style="text-align: center;">${i.count }</td>
+             <td style="text-align: center;">${dto.name }</td>
+             <td style="text-align: center;">${dto.id }</td>
+             <td style="text-align: center;">${dto.hp}</td>
              <td>
 			 <fmt:formatDate value="${dto.gaipday}" pattern="yyyy-MM-dd HH:mm:ss"/>
 		    </td>
-             <td>
+             <td style="text-align: center;">
                <button type="button" class="btn btn-outline-info btn-sm"
                onclick="location.href='updateform?num=${dto.num}'">수정</button>
                <button type="button" class="btn btn-outline-danger btn-sm"

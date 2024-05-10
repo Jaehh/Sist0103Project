@@ -8,4 +8,8 @@ public interface MemberDaoInter {
 	public int getTotalCount();
 	public List<MemberDto> getAllMemDatas();
 	public void insertMem(MemberDto dto);
+	public MemberDto getMember(String num);
+	public int passCheck(String num, String pass);
+	public void updateMember(MemberDto dto);
+	public void deleteMember(String num);
 }
