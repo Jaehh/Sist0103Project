@@ -1,4 +1,4 @@
-package boot.jpa.ex3;
+package boot.jpa.upload;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,13 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"*.data"})
-@EntityScan("*.data") //dto인식
-@EnableJpaRepositories("*.data") //dao 인식
-public class SpringBootJpaEx3Application {
+@ComponentScan({"board.data"})
+@EntityScan("board.data")
+@EnableJpaRepositories("board.data")
+public class SpringBootJpaUploadApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootJpaEx3Application.class, args);
+		SpringApplication.run(SpringBootJpaUploadApplication.class, args);
 	}
 
 }

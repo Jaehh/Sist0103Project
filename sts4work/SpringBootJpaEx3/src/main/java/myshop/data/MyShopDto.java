@@ -25,7 +25,7 @@ public class MyShopDto {
 	private String sangname;
 	
 	@Column //이름이 같으면 생략가능
-	private String snagprice;
+	private String sangprice;
 	
 	@Column
 	private String sangcolor;
@@ -34,5 +34,6 @@ public class MyShopDto {
 	private String sangipgo;
 	
 	@CreationTimestamp //엔티티 생성시점의 시간 자동등록
+	@Column(updatable = false) //수정시 이 컬럼은 수정하지 않겠다
 	private Timestamp writeday;
 }
