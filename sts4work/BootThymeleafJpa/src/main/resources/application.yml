@@ -1,0 +1,20 @@
+server:
+  port: 9003
+#thymeleaf
+spring:
+  thymeleaf:
+    cache: false
+#mysql setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/coffee
+    username: angel
+    password: a1234
+#Jpa setting
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
