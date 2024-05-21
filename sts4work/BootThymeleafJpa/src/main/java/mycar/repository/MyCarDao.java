@@ -35,4 +35,14 @@ public class MyCarDao {
 	public void updateMycar(MyCarDto dto) {
 		daoInter.save(dto); //num포함이므로 수정
 	}
+	
+	public void updateMyCarNoPhoto(MyCarDto dto) {
+		
+		Long num = dto.getNum();
+		String carname = dto.getCarname();
+		String carcolor=dto.getCarcolor();
+		int carprice = dto.getCarprice();
+		
+		daoInter.updateMyCarNoPhoto(num, carname, carprice, carcolor);
+	}
 }

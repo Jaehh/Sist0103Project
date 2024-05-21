@@ -10,6 +10,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div style="margin:100px 100px; width:500px;">
+	<form action="update" method="post" enctype="multipart/form-data">
+		
+		<input type="hidden" name="num" th:value="${dto.num}">
+		<table class="table table-bordered">
+			<tr>
+				<th class="table-warning" width="120">자동차명</th>
+				<td>
+				<input type="text" name="carname" required="required"
+				class="form-control" style="width:130px;" th:value="${dto.carname}">
+				</td>
+			</tr>
+			<tr>
+				<th class="table-warning" width="120">자동차색상</th>
+				<td>
+				<input type="color" name="carcolor" required="required"
+				class="form-control" style="width:280px;" th:value="${dto.carcolor}">
+				</td>
+			</tr>
+			<tr>
+				<th class="table-warning" width="120">자동차가격</th>
+				<td>
+				<input type="text" name="carprice" required="required"
+				class="form-control" style="width:130px;" th:value="${dto.carprice}">
+				</td>
+			</tr>
+			<tr>
+				<th class="table-warning" width="120">자동차사진</th>
+				<td>
+				<input type="file" name="upload">
+				</td>
+			</tr>
+			
+			<tr>
+			<td colspan="2" align="center">
+				<button type="submit" class="btn btn-info" style="width:100px;">수정</button>
+				<button type="button" class="btn btn-info" style="width:100px;"
+				onclick="location.href='list'">목록</button>
+			</td>
+			</tr>
+		</table>
+	</form>
+</div>
 </body>
 </html>
