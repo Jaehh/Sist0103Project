@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.data.BookMapperInter">
+    <select id="getTotalBook" resultType="int">
+        select count(*) from book
+    </select>
+    
+    <insert id="insertBook" parameterType="bdto">
+    	insert into book (bookname,writer,bookprice,bookimage,bookcompany,ipgoday) values (#{bookname},#{writer},#{bookprice},#{bookimage},#{bookcompany},now())
+    </insert>
+    
+    <select id="getAllBooks" resultType="bdto">
+    	select * from book order by bookname asc
+    </select>
+    
+    <select id="getBook" parameterType="String" resultType="bdto">
+    	select * from book where num=#{num}
+    </select>
+    
+    <update id="updateBook" parameterType="bdto">
+    	update book set bookname=#{bookname},writer=#{writer},bookprice=#{bookprice}
+    	<if test="bookimage!='no'">
+    	,bookimage=#{bookimage} 
+    	</if>
+    	,bookcompany=#{bookcompany}
+    	where num=#{num}
+    </update>
+    
+    <delete id="deleteBook" parameterType="String">
+    	delete from book where num=#{num}
+    </delete>
+</mapper>
