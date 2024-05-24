@@ -8,10 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan({"boot.guest.*"})
 @MapperScan({"boot.guest.mapper"})
-public class BootMybatisGuest1Application {
+public class BootMybatisGuestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootMybatisGuest1Application.class, args);
+		SpringApplication.run(BootMybatisGuestApplication.class, args);
 	}
 
 }

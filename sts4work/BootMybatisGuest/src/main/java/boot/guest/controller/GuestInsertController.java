@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class GuestInsertController {
-	
+
 	@Autowired
 	private GuestService gService;
 	
@@ -29,18 +29,21 @@ public class GuestInsertController {
 	@PostMapping("/guest/upload")
 	@ResponseBody
 	public Map<String, String> upload(HttpServletRequest request,
-			@RequestParam ArrayList<MultipartFile> photos){
+			@RequestParam ArrayList<MultipartFile> photos)
+	{
 		
-		//이미지 저장 경로
+		//이미지저장경로
 		String path=request.getServletContext().getRealPath("/guestphoto");
 		
-		//이미지 저장 클래스 선언 후 업로드
+		//이미지저장클래스선언후 업로드
 		photo="";
 		
 		if(photos.get(0).getOriginalFilename().equals(""))
 			photo="no";
 		else {
-			for(MultipartFile f:photos) {
+			
+			for(MultipartFile f:photos)
+			{
 				String fName=f.getOriginalFilename();
 				photo+=fName+",";
 				
@@ -55,10 +58,10 @@ public class GuestInsertController {
 				}
 			}
 			
-			photo=photo.substring(0,photo.length()-1);
+			photo=photo.substring(0, photo.length()-1);
 		}
 		
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map=new HashMap<>();
 		
 		this.photo=photo;
 		map.put("photoname", photo);
@@ -66,14 +69,18 @@ public class GuestInsertController {
 		return map;
 	}
 	
+	
+	
 	@PostMapping("/guest/insert")
 	@ResponseBody
-	public Map<String, String> insert(@ModelAttribute GuestDto dto){
+	public Map<String, String> insert(@ModelAttribute GuestDto dto)
+	{
 		dto.setPhoto(photo);
 		gService.insertGuest(dto);
 		
-		Map<String, String> map= new HashMap<>();
+		Map<String, String> map=new HashMap<>();
 		
+		//호출한 곳으로 일단 메세지 보내기
 		map.put("msg", "insert성공");
 		return map;
 	}

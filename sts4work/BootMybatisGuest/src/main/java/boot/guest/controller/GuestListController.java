@@ -12,23 +12,24 @@ import boot.guest.service.GuestService;
 
 @Controller
 public class GuestListController {
-	
+
 	@Autowired
 	private GuestService gService;
-
+	
 	@GetMapping("/")
-	public String start() {
+	public String start()
+	{
 		return "redirect:guest/list";
 	}
 	
 	@GetMapping("/guest/list")
-	public String list(Model model) {
-		
+	public String list(Model model)
+	{
 		int totalCount=gService.getTotalCount();
-		List<GuestDto>list = gService.getAllDatas();
-		
+		List<GuestDto>list=gService.getAllDatas();
 		
 		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("list", list);
 		return "guest/guestlist";
 	}
 }

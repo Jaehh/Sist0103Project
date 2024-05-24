@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="boot.guest.mapper.GuestMapper">
-  	<select id="getTotalCount" resultType="int">
-  		select count(*) from guest
-  	</select>
-  	
-  	<insert id="insertGuest" parameterType="gdto">
-  		insert into guest (nick,pass,photo,content,likes,writeday) values (#{nick},#{pass},#{photo},#{content},#{likes},now())
-  	</insert>
-  	
-  	<select id="getAllDatas" resultType="gdto">
-  		select * from guest order by num desc
-  	</select>
-  </mapper>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boot.guest.mapper.GuestMapper">
+	<select id="getTotalCount" resultType="int">
+	   select count(*) from guest
+	</select>
+	<insert id="insertGuest" parameterType="gdto">
+	  insert into guest (nick,pass,photo,content,likes,writeday) values (#{nick},#{pass},#{photo},#{content},#{likes},now())
+	</insert>
+	<select id="getAllDatas" resultType="gdto">
+	  select * from guest order by num desc
+	</select>
+	<select id="isEqualPassCheck" parameterType="Map" resultType="int">
+		select count(*) from guest where num=#{num} and pass=#{pass}
+	</select>
+	<delete id="deleteGuest" parameterType="int">
+		delete from guest where num=#{num}
+	</delete>
+</mapper>
