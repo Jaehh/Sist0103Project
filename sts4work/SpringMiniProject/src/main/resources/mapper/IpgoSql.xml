@@ -8,6 +8,19 @@
      insert into ipgo (sangpum,price,photoname,ipgoday) values (#{sangpum},#{price},#{photoname},now())
    </insert>
    <select id="getAllDatas" resultType="IpgoDto">
-     select * from ipgo order by num
+     select * from ipgo order by num desc
    </select>
+   <select id="getData" parameterType="String" resultType="IpgoDto">
+   	 select * from ipgo where num=#{num}
+   </select>
+   <update id="updateIpgo" parameterType="IpgoDto">
+   	 update ipgo set sangpum=#{sangpum},price=#{price}
+   	 <if test="photoname!=null">
+   	 	,photoname=#{photoname}
+   	 </if>
+   	 	where num=#{num}
+   </update>
+   <delete id="deleteIpgo" parameterType="String">
+    	delete from ipgo where num=#{num}
+    </delete>
 </mapper>
