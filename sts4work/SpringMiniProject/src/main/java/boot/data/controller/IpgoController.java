@@ -100,16 +100,13 @@ public class IpgoController {
 	}
 	
 	@GetMapping("/ipgo/updateform")
-	public String updateform(@RequestParam String num, Model model) {
-		
-		IpgoDto dto= mapper.getData(num);
-		
+	public String updateform(@RequestParam String num,Model model)
+	{
+		IpgoDto dto=mapper.getData(num);
 		model.addAttribute("dto", dto);
-		
 		return "/ipgo/updateform";
 	}
-
-
+	
 	@PostMapping("/ipgo/update")
 	public String update(@ModelAttribute IpgoDto dto,
 			@RequestParam ArrayList<MultipartFile> upload,
@@ -121,7 +118,7 @@ public class IpgoController {
 		String uploadName="";
 		
 		if(upload.get(0).getOriginalFilename().equals(""))
-			uploadName="no";
+			uploadName=null;
 		else {
 			for(MultipartFile f:upload)
 			{
@@ -151,23 +148,4 @@ public class IpgoController {
 		mapper.updateIpgo(dto);
 		return "redirect:list";
 	}
-	
-	 // delete
-    @GetMapping("/ipgo/delete")
-    public String delete(@RequestParam String num, HttpSession session) {
-        
-        String photo = mapper.getData(num).getPhotoname();
-        if (photo != null) {
-            String path = session.getServletContext().getRealPath("/ipgoimage");
-            
-            File file = new File(path + "\\" + photo);
-            
-            if (file.exists()) {
-                file.delete();
-            }
-        }
-        
-        mapper.deleteIpgo(num);
-        return "redirect:list";
-    }
 }

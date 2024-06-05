@@ -1,31 +1,48 @@
 package boot.data.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import boot.data.dto.MemberDto;
-import boot.data.mapper.MemberMapperInter;
+import boot.data.dto.MemBoardDto;
+import boot.data.service.AnsMboardService;
+import boot.data.service.MemBoardService;
+import boot.data.service.MemberService;
 
 @Controller
 public class BoardController {
 
 	@Autowired
-	MemberMapperInter dao;
+	MemBoardService service;
+	
+	@Autowired
+	MemberService mservice;
+	
+	@Autowired
+	AnsMboardService aservice;
+	
 	
 	@GetMapping("/board/list")
-	public ModelAndView list()
+	public ModelAndView list(@RequestParam(value = "currentPage",defaultValue = "1")int currentPage)
 	{
 		ModelAndView mview=new ModelAndView();
 		
+		int totalCount=service.getTotalCount();
 		
 		//페이징에 필요한 변수
-				int totalCount=dao.getTotalCount();
+				
 				int perPage=3; //한페이지당 보여질 글의 갯수
 				int perBlock=5; //한블럭당 보여질 페이지 갯수
 				int start; //db에서 가져올 글의 시작번호(mysql은 첫글이0번,오라클은 1번);
@@ -58,8 +75,15 @@ public class BoardController {
 				no=totalCount-(currentPage-1)*perPage;
 
 				//리스트
-				//List<BoardDto> list=dao.getAllList();
-				List<MemberDto> list=dao.getList(start, perPage);
+				List<MemBoardDto> list=service.getList(start, perPage);
+				
+				//댓글개수
+				for(MemBoardDto d:list)
+				{
+					d.setAcount(aservice.getAllAnswer(d.getNum()).size()); //댓글리스트에 포함
+					System.out.println(aservice.getAllAnswer(d.getNum()).size());
+				}
+				
 				
 				//저장
 				mview.addObject("totalCount", totalCount);
@@ -69,40 +93,89 @@ public class BoardController {
 				mview.addObject("endPage", endPage);
 				mview.addObject("currentPage", currentPage);
 				mview.addObject("totalPage", totalPage);
-				
-				//포워드
-				mview.setViewName("board/boardlist");
-				
-				return mview;
-			}
+		
+		
+		mview.setViewName("/board/boardlist");
+		return mview;
+	}
 	
-	//content로 이동
-	//조회수, dto
+	@GetMapping("/board/form")
+	public String form()
+	{
+		return "/board/writeform";
+	}
+	
+	@PostMapping("/board/insert")
+	public String insert(@ModelAttribute MemBoardDto dto,HttpSession session)
+	{
+		String path=session.getServletContext().getRealPath("/boardphoto");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		if(dto.getUpload().getOriginalFilename().equals(""))
+			dto.setUploadfile("no");
+		else {
+			String uploadfile=sdf.format(new Date())+dto.getUpload().getOriginalFilename();
+			dto.setUploadfile(uploadfile);
+			
+			try {
+				dto.getUpload().transferTo(new File(path+"\\"+uploadfile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		//세션에서 아이디 얻어서 dto저장
+		String myid=(String)session.getAttribute("myid");
+		dto.setMyid(myid);
+		
+		//이름
+		String name=mservice.getName(myid);
+		dto.setName(name);
+		
+		//insert
+		service.insertMemBoard(dto);
+		
+		
+		
+		return "redirect:list";
+	}
+	
+	
+	//content로이동
+	//조회수,dto
 	@GetMapping("/board/content")
-	public ModelAndView content(String num,@RequestParam(defaultValue="1") int currentPage) {
-		ModelAndView mview = new ModelAndView();
+	public ModelAndView content(String num,@RequestParam(defaultValue = "1") int currentPage)
+	{
+		ModelAndView mview=new ModelAndView();
 		
 		service.updateReadCount(num);
-		MemberDto dto = service.getData(num);
+		MemBoardDto dto=service.getData(num);
+		
 		
 		//업로드 파일의 확장자 얻기
-		int dtoLoc = dto.getUploadfile().lastIndexOf('.');
-		String ext = dto.getUploadfile().substring(dtoLoc+1); //다음글자부터 끝까지
+		int dtoLoc=dto.getUploadfile().lastIndexOf('.');
+		String ext=dto.getUploadfile().substring(dtoLoc+1); //다음글자부터 끝까지
 		
 		System.out.println(dtoLoc+","+ext);
 		
-		//이미지인지 아닌지 보고 출력하기 위해서
+		
+		//이미지인지 아닌지 보고 출력하기위해서
 		if(ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("gif") || ext.equalsIgnoreCase("png") || ext.equalsIgnoreCase("jpeg"))
 			mview.addObject("bupload", true);
 		else
 			mview.addObject("bupload", false);
-				
-				mview.addObject("dto", dto);
-				mview.addObject("currentPage", currentPage);
 		
 		
+		mview.addObject("dto", dto);
+		mview.addObject("currentPage", currentPage);
+		
+		mview.setViewName("/board/content");		
+		return mview;
 	}
-	
-	
-	
-	}
+}

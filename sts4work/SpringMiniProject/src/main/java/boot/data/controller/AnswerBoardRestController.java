@@ -45,10 +45,24 @@ public class AnswerBoardRestController {
 		return service.getAllAnswer(num);
 	}
 	//수정
+	@GetMapping("/board/adata")
+	public AnswerMboardDto adata(String idx)
+	{
+		return service.getAnswer(idx);
+	}
+	
+	@PostMapping("/board/aupdate")
+	public void aupadte(AnswerMboardDto dto)
+	{
+		service.updateAnswer(dto);
+	}
+	
 	
 	//삭제
 	@GetMapping("/board/adelete")
-	public void delete(String idx) {
+	public void delete(String idx)
+	{
 		service.deleteAnswer(idx);
 	}
+	
 }
